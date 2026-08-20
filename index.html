@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,269 +7,1207 @@
 <title>HAZARD 69 OFFICIAL</title>
 
 <style>
+
+/* =========================
+   RESET
+========================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:
-        radial-gradient(circle at top,#24105c 0%,#080812 45%,#020205 100%);
-    font-family:Arial,sans-serif;
-    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#020208;
+    color:#fff;
     overflow-x:hidden;
 }
 
-.container{
-    width:92%;
-    max-width:430px;
-    padding:30px 22px;
-    text-align:center;
+/* =========================
+   BACKGROUND
+========================= */
 
-    background:rgba(255,255,255,0.07);
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:30px;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-5;
 
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.6),
-        0 0 35px rgba(124,60,255,.35);
-
-    backdrop-filter:blur(15px);
-    transform:perspective(1000px) rotateX(2deg);
+    background:
+    radial-gradient(
+        circle at 15% 20%,
+        rgba(124,60,255,.25),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 85% 25%,
+        rgba(0,229,255,.18),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 50% 90%,
+        rgba(255,0,100,.15),
+        transparent 35%
+    );
 }
 
-/* Logo */
+/* =========================
+   PARTICLES
+========================= */
+
+.particle{
+    position:fixed;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:#fff;
+    opacity:.5;
+    z-index:-2;
+
+    animation:
+    floating 7s ease-in-out infinite;
+}
+
+.p1{left:8%;top:20%;}
+.p2{left:25%;top:70%;animation-delay:1s;}
+.p3{left:50%;top:25%;animation-delay:2s;}
+.p4{left:75%;top:75%;animation-delay:3s;}
+.p5{left:90%;top:30%;animation-delay:4s;}
+.p6{left:40%;top:80%;animation-delay:5s;}
+
+@keyframes floating{
+
+    0%,100%{
+        transform:translateY(0) scale(1);
+    }
+
+    50%{
+        transform:translateY(-45px) scale(1.5);
+    }
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+
+    padding:18px 7%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(2,2,8,.72);
+    backdrop-filter:blur(18px);
+
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+
+    z-index:9999;
+
+    animation:
+    navEntry 1s ease forwards;
+}
+
+@keyframes navEntry{
+
+    from{
+        opacity:0;
+        transform:translateY(-30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
 .logo{
+    font-size:21px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:#8b5cff;
+
+    text-shadow:
+    0 0 10px #7c3cff,
+    0 0 30px #7c3cff;
+}
+
+.links a{
+    color:#aaa;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:14px;
+    transition:.3s;
+}
+
+.links a:hover{
+    color:#00e5ff;
+
+    text-shadow:
+    0 0 10px #00e5ff;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+
+    padding:
+    150px 7% 80px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+.hero-content{
+    width:100%;
+    max-width:950px;
+
+    opacity:0;
+
+    animation:
+    heroEntry 1.4s
+    cubic-bezier(.17,.67,.25,1)
+    .3s forwards;
+}
+
+@keyframes heroEntry{
+
+    0%{
+        opacity:0;
+        transform:
+        translateY(80px)
+        scale(.75)
+        rotateX(15deg);
+        filter:blur(12px);
+    }
+
+    60%{
+        opacity:1;
+        transform:
+        translateY(-10px)
+        scale(1.03);
+        filter:blur(0);
+    }
+
+    100%{
+        opacity:1;
+        transform:
+        translateY(0)
+        scale(1)
+        rotateX(0);
+        filter:blur(0);
+    }
+}
+
+/* BADGE */
+
+.badge{
+    display:inline-block;
+
+    padding:9px 20px;
+
+    border-radius:50px;
+
+    background:
+    rgba(255,255,255,.06);
+
+    border:
+    1px solid rgba(255,255,255,.15);
+
+    color:#00e5ff;
+
+    font-size:12px;
+    letter-spacing:2px;
+
+    box-shadow:
+    0 0 30px
+    rgba(0,229,255,.12);
+
+    animation:
+    badgeGlow 3s ease-in-out infinite;
+}
+
+@keyframes badgeGlow{
+
+    0%,100%{
+        box-shadow:
+        0 0 20px
+        rgba(0,229,255,.10);
+    }
+
+    50%{
+        box-shadow:
+        0 0 35px
+        rgba(0,229,255,.30);
+    }
+}
+
+/* TITLE */
+
+.hero h1{
+
+    margin-top:25px;
+
+    font-size:
+    clamp(48px,9vw,100px);
+
+    line-height:.95;
+
+    font-weight:1000;
+
+    letter-spacing:-5px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #fff,
+        #8b5cff,
+        #00e5ff,
+        #fff
+    );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    animation:
+    titleGradient 6s linear infinite;
+}
+
+@keyframes titleGradient{
+
+    0%{
+        background-position:0%;
+    }
+
+    50%{
+        background-position:100%;
+    }
+
+    100%{
+        background-position:0%;
+    }
+}
+
+/* DESCRIPTION */
+
+.hero p{
+
+    max-width:650px;
+
+    margin:
+    25px auto;
+
+    color:#999;
+
+    line-height:1.8;
+
+    font-size:16px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:30px;
+}
+
+.btn{
+
+    display:inline-block;
+
+    padding:15px 28px;
+
+    border-radius:14px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    border:
+    1px solid rgba(255,255,255,.15);
+
+    background:
+    linear-gradient(
+        135deg,
+        #7c3cff,
+        #4319bd
+    );
+
+    box-shadow:
+    0 10px 35px
+    rgba(124,60,255,.3);
+
+    transition:
+    transform .3s,
+    box-shadow .3s;
+}
+
+.btn:hover{
+
+    transform:
+    translateY(-6px)
+    scale(1.03);
+
+    box-shadow:
+    0 18px 50px
+    rgba(124,60,255,.6);
+}
+
+.btn.secondary{
+
+    background:
+    rgba(255,255,255,.06);
+}
+
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile{
+
+    max-width:700px;
+
+    margin:
+    45px auto 0;
+
+    padding:30px;
+
+    border-radius:30px;
+
+    background:
+    rgba(255,255,255,.055);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+    0 25px 90px
+    rgba(0,0,0,.45);
+
+    animation:
+    profileEntry 1s
+    ease 1s backwards;
+}
+
+@keyframes profileEntry{
+
+    from{
+        opacity:0;
+        transform:
+        translateY(60px)
+        scale(.85);
+    }
+
+    to{
+        opacity:1;
+        transform:
+        translateY(0)
+        scale(1);
+    }
+}
+
+/* PROFILE LOGO */
+
+.profile-logo{
+
     width:105px;
     height:105px;
+
     margin:auto;
+
     border-radius:50%;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    background:linear-gradient(135deg,#7c3cff,#ff2d75,#ff9a00);
+    font-size:38px;
+    font-weight:1000;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff0066,
+        #7c3cff,
+        #00e5ff
+    );
 
     box-shadow:
-        0 0 20px #7c3cff,
-        0 0 45px rgba(255,45,117,.5);
+    0 0 30px
+    rgba(124,60,255,.7),
 
-    font-size:35px;
-    font-weight:bold;
+    0 0 80px
+    rgba(0,229,255,.15);
 
-    animation:float 3s ease-in-out infinite;
+    animation:
+    logoFloat 4s ease-in-out infinite;
 }
 
-@keyframes float{
+@keyframes logoFloat{
+
     0%,100%{
-        transform:translateY(0);
+        transform:translateY(0) rotate(0);
     }
+
     50%{
-        transform:translateY(-8px);
+        transform:
+        translateY(-8px)
+        rotate(3deg);
     }
-}
-
-h1{
-    margin-top:22px;
-    font-size:29px;
-    letter-spacing:2px;
-
-    background:linear-gradient(90deg,#fff,#00e5ff,#c77dff,#fff);
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.subtitle{
-    margin-top:8px;
-    color:#aaa;
-}
-
-/* Instagram */
-.instagram{
-    margin-top:25px;
-    padding:15px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-
-    border-radius:18px;
-
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-
-    text-decoration:none;
-    color:white;
-
-    transition:.3s;
-}
-
-.instagram:hover{
-    transform:translateY(-4px) scale(1.02);
-    box-shadow:0 0 25px rgba(255,45,117,.45);
-}
-
-.insta-icon{
-    width:38px;
-    height:38px;
-    border-radius:11px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:22px;
-    font-weight:bold;
-
-    background:linear-gradient(
-        135deg,
-        #833ab4,
-        #fd1d1d,
-        #fcb045
-    );
 }
 
 .username{
-    font-size:17px;
-    font-weight:bold;
-}
 
-/* Photo Button */
-.photo-btn{
-    display:block;
     margin-top:18px;
-    padding:15px;
 
-    border-radius:18px;
+    font-size:25px;
 
-    background:linear-gradient(
-        135deg,
-        #7c3cff,
-        #00bfff
-    );
-
-    color:white;
-    text-decoration:none;
-
-    font-size:17px;
     font-weight:bold;
-
-    box-shadow:
-        0 8px 25px rgba(0,191,255,.25);
-
-    transition:.3s;
 }
 
-.photo-btn:hover{
-    transform:translateY(-4px) scale(1.03);
-    box-shadow:
-        0 0 30px rgba(124,60,255,.7);
+.instagram{
+
+    margin-top:7px;
+
+    color:#888;
+
+    font-size:14px;
 }
 
-/* Photo */
-.photo{
-    display:none;
-    margin-top:20px;
+/* =========================
+   PHOTO UPLOAD
+========================= */
+
+.photo-area{
+
+    margin-top:25px;
 }
 
-.photo img{
+.photo-preview{
+
     width:100%;
-    max-height:300px;
+
+    max-height:400px;
+
     object-fit:cover;
 
-    border-radius:20px;
+    display:none;
 
-    border:2px solid rgba(255,255,255,.2);
+    margin-bottom:18px;
+
+    border-radius:22px;
+
+    border:
+    1px solid rgba(255,255,255,.15);
 
     box-shadow:
-        0 0 30px rgba(124,60,255,.4);
+    0 20px 60px
+    rgba(0,0,0,.5);
+
+    animation:
+    photoEntry .7s ease;
 }
 
-.footer{
-    margin-top:25px;
-    font-size:12px;
+@keyframes photoEntry{
+
+    from{
+        opacity:0;
+        transform:
+        scale(.8)
+        rotateX(15deg);
+    }
+
+    to{
+        opacity:1;
+        transform:
+        scale(1)
+        rotateX(0);
+    }
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+    padding:100px 7%;
+}
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:50px;
+}
+
+.section-title h2{
+
+    font-size:
+    clamp(32px,5vw,48px);
+
+    margin-bottom:10px;
+}
+
+.section-title p{
+
     color:#777;
 }
+
+/* =========================
+   SCROLL ENTRY
+========================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+    translateY(70px)
+    scale(.94);
+
+    filter:blur(8px);
+
+    transition:
+    opacity .9s ease,
+    transform .9s ease,
+    filter .9s ease;
+}
+
+.reveal.show{
+
+    opacity:1;
+
+    transform:
+    translateY(0)
+    scale(1);
+
+    filter:blur(0);
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:22px;
+}
+
+.card{
+
+    padding:32px;
+
+    min-height:210px;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.025)
+    );
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(15px);
+
+    transition:.4s;
+}
+
+.card:hover{
+
+    transform:
+    translateY(-12px)
+    scale(1.02);
+
+    border-color:
+    rgba(0,229,255,.45);
+
+    box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.4);
+}
+
+.icon{
+
+    font-size:40px;
+
+    margin-bottom:20px;
+}
+
+.card h3{
+
+    margin-bottom:12px;
+
+    font-size:20px;
+}
+
+.card p{
+
+    color:#888;
+
+    line-height:1.7;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-box{
+
+    max-width:750px;
+
+    margin:auto;
+
+    padding:45px;
+
+    text-align:center;
+
+    border-radius:30px;
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(18px);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    padding:35px;
+
+    text-align:center;
+
+    color:#555;
+
+    border-top:
+    1px solid rgba(255,255,255,.08);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    nav{
+        padding:16px 5%;
+    }
+
+    .links{
+        display:none;
+    }
+
+    .hero{
+        padding:
+        130px 5% 70px;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    section{
+        padding:75px 5%;
+    }
+
+    .profile{
+        padding:25px 18px;
+    }
+
+    .contact-box{
+        padding:30px 20px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- PARTICLES -->
 
-    <!-- Logo -->
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+<div class="particle p6"></div>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
     <div class="logo">
-        H69
+        HAZARD <span>69</span>
     </div>
 
-    <h1>HAZARD 69 OFFICIAL</h1>
+    <div class="links">
 
-    <p class="subtitle">
-        Official Website
+        <a href="#home">Home</a>
+
+        <a href="#about">About</a>
+
+        <a href="#features">Features</a>
+
+        <a href="#contact">Contact</a>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+    <div class="badge">
+        ★ OFFICIAL WEBSITE ★
+    </div>
+
+    <h1>
+        HAZARD 69
+    </h1>
+
+    <p>
+        Welcome to the official digital space of
+        <b>HAZARD 69 OFFICIAL</b>.
+        Experience a modern, stylish and powerful
+        digital identity.
     </p>
 
-    <!-- Instagram -->
-    <a
-        class="instagram"
-        href="https://instagram.com/hazard69official"
-        target="_blank"
-    >
 
-        <div class="insta-icon">
-            ◎
+    <div class="buttons">
+
+        <a
+            href="#about"
+            class="btn"
+        >
+            Explore Now
+        </a>
+
+        <a
+            href="#contact"
+            class="btn secondary"
+        >
+            Connect
+        </a>
+
+    </div>
+
+
+    <!-- PROFILE -->
+
+    <div class="profile">
+
+        <div class="profile-logo">
+            H69
         </div>
 
         <div class="username">
-            @hazard69official
+            HAZARD 69 OFFICIAL
         </div>
 
-    </a>
+        <div class="instagram">
+            📷 @hazard69official
+        </div>
 
-    <!-- Photo Button -->
-    <a
-        href="javascript:void(0)"
-        class="photo-btn"
-        onclick="showPhoto()"
-    >
-        📸 VIEW PHOTO
-    </a>
 
-    <!-- Photo -->
-    <div class="photo" id="photo">
+        <!-- PHOTO -->
 
-        <img
-            src="YOUR_PHOTO_URL_HERE"
-            alt="HAZARD 69 PHOTO"
-        >
+        <div class="photo-area">
 
-    </div>
+            <img
+                id="preview"
+                class="photo-preview"
+                alt="Uploaded photo"
+            >
 
-    <div class="footer">
-        © 2026 HAZARD 69 OFFICIAL
+            <label
+                for="photoInput"
+                class="btn"
+            >
+                📸 Add Photo
+            </label>
+
+            <input
+                id="photoInput"
+                type="file"
+                accept="image/*"
+                style="display:none;"
+            >
+
+        </div>
+
     </div>
 
 </div>
 
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<div class="section-title reveal">
+
+    <h2>
+        About Us
+    </h2>
+
+    <p>
+        Built with style. Designed for the future.
+    </p>
+
+</div>
+
+
+<div class="cards">
+
+    <div class="card reveal">
+
+        <div class="icon">
+            ⚡
+        </div>
+
+        <h3>
+            Fast Experience
+        </h3>
+
+        <p>
+            A lightweight and smooth website
+            experience designed for mobile
+            and desktop users.
+        </p>
+
+    </div>
+
+
+    <div class="card reveal">
+
+        <div class="icon">
+            💎
+        </div>
+
+        <h3>
+            Premium Design
+        </h3>
+
+        <p>
+            Glassmorphism, glowing gradients,
+            animations and modern visual effects.
+        </p>
+
+    </div>
+
+
+    <div class="card reveal">
+
+        <div class="icon">
+            🚀
+        </div>
+
+        <h3>
+            Next Level
+        </h3>
+
+        <p>
+            A unique digital identity created
+            specially for HAZARD 69 OFFICIAL.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section id="features">
+
+<div class="section-title reveal">
+
+    <h2>
+        Features
+    </h2>
+
+    <p>
+        Everything in one place.
+    </p>
+
+</div>
+
+
+<div class="cards">
+
+    <div class="card reveal">
+
+        <div class="icon">
+            📱
+        </div>
+
+        <h3>
+            Mobile Friendly
+        </h3>
+
+        <p>
+            Fully responsive layout for
+            smartphones, tablets and computers.
+        </p>
+
+    </div>
+
+
+    <div class="card reveal">
+
+        <div class="icon">
+            🎨
+        </div>
+
+        <h3>
+            Custom Style
+        </h3>
+
+        <p>
+            Easily customize your colors,
+            text, photos and social links.
+        </p>
+
+    </div>
+
+
+    <div class="card reveal">
+
+        <div class="icon">
+            ✨
+        </div>
+
+        <h3>
+            Entry Animation
+        </h3>
+
+        <p>
+            Smooth fade, slide, scale and
+            scroll reveal animations.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="section-title reveal">
+
+    <h2>
+        Connect With Us
+    </h2>
+
+    <p>
+        Follow HAZARD 69 OFFICIAL.
+    </p>
+
+</div>
+
+
+<div class="contact-box reveal">
+
+    <h2>
+        📷 HAZARD 69 OFFICIAL
+    </h2>
+
+    <p
+        style="
+        color:#888;
+        margin:15px 0 25px;
+        "
+    >
+        Stay connected and follow
+        our latest updates.
+    </p>
+
+
+    <a
+        href="https://www.instagram.com/"
+        target="_blank"
+        class="btn"
+    >
+        Instagram ↗
+    </a>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 HAZARD 69 OFFICIAL
+    — All Rights Reserved.
+
+</footer>
+
+
 <script>
 
-function showPhoto(){
+/* =========================
+   PHOTO ADD
+========================= */
 
-    const photo = document.getElementById("photo");
+const photoInput =
+document.getElementById("photoInput");
 
-    if(photo.style.display === "block"){
-        photo.style.display = "none";
-    }else{
-        photo.style.display = "block";
+const preview =
+document.getElementById("preview");
+
+
+photoInput.addEventListener(
+    "change",
+    function(){
+
+        const file =
+        this.files[0];
+
+        if(!file) return;
+
+        const reader =
+        new FileReader();
+
+        reader.onload =
+        function(e){
+
+            preview.src =
+            e.target.result;
+
+            preview.style.display =
+            "block";
+
+        };
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* =========================
+   SCROLL ENTRY ANIMATION
+========================= */
+
+const revealElements =
+document.querySelectorAll(".reveal");
+
+
+const observer =
+new IntersectionObserver(
+
+    (entries) => {
+
+        entries.forEach(
+            (entry) => {
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+    },
+
+    {
+        threshold:.15
     }
 
-}
+);
+
+
+revealElements.forEach(
+    (element) => {
+
+        observer.observe(element);
+
+    }
+);
 
 </script>
 
