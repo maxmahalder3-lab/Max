@@ -3,472 +3,585 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>HAZARD 69 — OFFICIAL</title>
+<title>HAZARD 69 | OFFICIAL</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
 }
 
 body{
-    background:#050505;
-    color:white;
-    overflow-x:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#03030a;
+  color:white;
+  overflow-x:hidden;
 }
 
 /* Animated Background */
-.background{
-    position:fixed;
-    inset:0;
-    z-index:-3;
-
-    background:
-        linear-gradient(120deg,rgba(0,0,0,.85),rgba(10,10,10,.45)),
-        url("bg.jpg");
-
-    background-size:cover;
-    background-position:center;
-
-    animation:zoom 18s infinite alternate ease-in-out;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,255,255,.15),transparent 30%),
+    radial-gradient(circle at 80% 70%,rgba(140,0,255,.18),transparent 35%),
+    linear-gradient(135deg,#02020a,#090014,#000);
 }
 
-@keyframes zoom{
-    from{transform:scale(1);}
-    to{transform:scale(1.08);}
+.particles{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle,#00ffff 1px,transparent 1px),
+    radial-gradient(circle,#9d00ff 1px,transparent 1px);
+  background-size:80px 80px,120px 120px;
+  animation:moveParticles 18s linear infinite;
+  opacity:.25;
 }
 
-/* Glow */
-.glow{
-    position:fixed;
-    width:350px;
-    height:350px;
-    border-radius:50%;
-    background:rgba(255,0,0,.18);
-    filter:blur(100px);
-    top:10%;
-    left:10%;
-    z-index:-2;
+@keyframes moveParticles{
+  from{transform:translateY(0)}
+  to{transform:translateY(-120px)}
 }
 
-/* Navbar */
+/* NAVBAR */
 nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:18px 6%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    background:rgba(0,0,0,.35);
-    backdrop-filter:blur(15px);
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-    z-index:20;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 6%;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid rgba(0,255,255,.15);
 }
 
-.brand{
-    font-size:22px;
-    font-weight:900;
-    letter-spacing:3px;
-    text-shadow:0 0 15px red;
-}
-
-.nav-btn{
-    padding:10px 18px;
-    border:1px solid rgba(255,0,0,.5);
-    border-radius:30px;
-    color:white;
-    text-decoration:none;
-    font-size:13px;
-    transition:.3s;
-}
-
-.nav-btn:hover{
-    background:red;
-    box-shadow:0 0 25px red;
-}
-
-/* Hero */
-.hero{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:100px 20px 40px;
-}
-
-.content{
-    max-width:850px;
-}
-
-/* Logo */
 .logo{
-    width:180px;
-    max-width:55vw;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:#fff;
+  text-shadow:0 0 10px #00ffff,0 0 25px #9d00ff;
+}
 
-    filter:
-        drop-shadow(0 0 15px rgba(255,0,0,.8))
-        drop-shadow(0 0 45px rgba(255,0,0,.4));
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:22px;
+  font-size:14px;
+  transition:.3s;
+}
 
-    animation:
-        float 4s ease-in-out infinite,
-        logoGlow 2s infinite alternate;
+nav a:hover{
+  color:#00ffff;
+  text-shadow:0 0 15px #00ffff;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:100px 20px 50px;
+  perspective:1200px;
+}
+
+.hero-card{
+  width:min(950px,94%);
+  padding:70px 30px;
+  border:1px solid rgba(0,255,255,.25);
+  border-radius:35px;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 0 50px rgba(0,255,255,.12),
+    inset 0 0 40px rgba(140,0,255,.08);
+  transform-style:preserve-3d;
+  animation:float 5s ease-in-out infinite;
 }
 
 @keyframes float{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-15px);}
+  0%,100%{transform:rotateX(1deg) rotateY(-1deg) translateY(0)}
+  50%{transform:rotateX(-2deg) rotateY(2deg) translateY(-12px)}
 }
 
-@keyframes logoGlow{
-    from{
-        filter:drop-shadow(0 0 10px red);
-    }
-    to{
-        filter:drop-shadow(0 0 35px red);
-    }
+.hero h1{
+  font-size:clamp(55px,12vw,125px);
+  font-weight:1000;
+  letter-spacing:8px;
+  background:linear-gradient(90deg,#00ffff,#fff,#a000ff,#00ffff);
+  background-size:300%;
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:gradient 5s linear infinite;
+  text-shadow:0 0 30px rgba(0,255,255,.2);
 }
 
-.subtitle{
-    margin-top:25px;
-    font-size:14px;
-    letter-spacing:7px;
-    color:#aaa;
+@keyframes gradient{
+  0%{background-position:0%}
+  100%{background-position:300%}
+}
+
+.hero p{
+  margin:20px auto 35px;
+  color:#bbb;
+  max-width:650px;
+  line-height:1.7;
+}
+
+.enter-btn{
+  display:inline-block;
+  padding:16px 40px;
+  border-radius:50px;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  letter-spacing:2px;
+  border:1px solid #00ffff;
+  background:linear-gradient(90deg,#00ffff22,#9d00ff33);
+  box-shadow:0 0 20px #00ffff55;
+  transition:.4s;
+}
+
+.enter-btn:hover{
+  transform:translateY(-5px) scale(1.05);
+  box-shadow:0 0 30px #00ffff,0 0 70px #9d00ff;
+}
+
+/* SECTIONS */
+section{
+  padding:100px 7%;
 }
 
 .title{
-    margin-top:12px;
-    font-size:clamp(45px,10vw,95px);
-    font-weight:1000;
-    letter-spacing:8px;
-
-    background:linear-gradient(
-        180deg,
-        #fff,
-        #ff3030,
-        #650000
-    );
-
-    -webkit-background-clip:text;
-    color:transparent;
-
-    text-shadow:0 0 30px rgba(255,0,0,.3);
+  text-align:center;
+  font-size:42px;
+  margin-bottom:50px;
+  letter-spacing:3px;
 }
 
-/* Enter Button */
-.enter{
-    display:inline-flex;
-    margin-top:35px;
-    padding:17px 45px;
-
-    color:white;
-    text-decoration:none;
-
-    font-weight:bold;
-    letter-spacing:3px;
-
-    border:1px solid rgba(255,0,0,.7);
-    border-radius:50px;
-
-    background:rgba(255,0,0,.08);
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-        0 0 15px rgba(255,0,0,.25),
-        inset 0 0 20px rgba(255,0,0,.05);
-
-    transition:.35s;
+.title span{
+  color:#00ffff;
+  text-shadow:0 0 15px #00ffff;
 }
 
-.enter:hover{
-    transform:translateY(-4px) scale(1.04);
-    background:#e60000;
-    box-shadow:
-        0 0 20px red,
-        0 0 60px rgba(255,0,0,.5);
-}
-
-/* Cards */
-.cards{
-    margin-top:55px;
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
+/* 3D CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  perspective:1000px;
 }
 
 .card{
-    width:170px;
-    padding:22px 15px;
-
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:20px;
-
-    backdrop-filter:blur(15px);
-
-    transition:.3s;
+  padding:25px;
+  min-height:230px;
+  border-radius:25px;
+  background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+  transition:.45s;
+  transform-style:preserve-3d;
 }
 
 .card:hover{
-    transform:translateY(-8px);
-    border-color:rgba(255,0,0,.6);
-    box-shadow:0 10px 35px rgba(255,0,0,.2);
+  transform:rotateX(6deg) rotateY(-6deg) translateY(-12px);
+  border-color:#00ffff;
+  box-shadow:0 20px 50px rgba(0,255,255,.2);
 }
 
-.card-icon{
-    font-size:28px;
-    margin-bottom:10px;
+.card img,
+.card video{
+  width:100%;
+  border-radius:18px;
+  display:block;
+  margin-bottom:18px;
 }
 
 .card h3{
-    font-size:14px;
-    letter-spacing:1px;
+  font-size:22px;
+  margin-bottom:10px;
 }
 
 .card p{
-    margin-top:6px;
-    font-size:11px;
-    color:#999;
+  color:#aaa;
+  line-height:1.6;
 }
 
-/* Social */
+/* ABOUT */
+.about{
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+  color:#bbb;
+  line-height:1.9;
+  font-size:17px;
+}
+
+/* SOCIAL */
 .social{
-    margin-top:35px;
-    display:flex;
-    justify-content:center;
-    gap:12px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px;
 }
 
 .social a{
-    width:45px;
-    height:45px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    border-radius:50%;
-
-    color:white;
-    text-decoration:none;
-
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.12);
-
-    transition:.3s;
+  text-decoration:none;
+  color:white;
+  padding:15px 25px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:50px;
+  background:rgba(255,255,255,.05);
+  transition:.4s;
 }
 
 .social a:hover{
-    background:red;
-    transform:translateY(-5px);
-    box-shadow:0 0 25px red;
+  transform:translateY(-7px);
+  border-color:#00ffff;
+  box-shadow:0 0 25px #00ffff66;
 }
 
-/* Music Button */
+/* MUSIC */
 .music{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-
-    width:55px;
-    height:55px;
-
-    border-radius:50%;
-    border:1px solid rgba(255,0,0,.6);
-
-    background:rgba(0,0,0,.6);
-    color:white;
-
-    cursor:pointer;
-
-    backdrop-filter:blur(15px);
-
-    box-shadow:0 0 20px rgba(255,0,0,.25);
-
-    z-index:50;
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:999;
 }
 
-.music:hover{
-    background:red;
-    box-shadow:0 0 30px red;
+.music button{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:1px solid #00ffff;
+  background:#05050d;
+  color:#00ffff;
+  font-size:22px;
+  cursor:pointer;
+  box-shadow:0 0 20px #00ffff66;
 }
 
-/* Footer */
+/* FOOTER */
 footer{
-    position:absolute;
-    bottom:15px;
-    width:100%;
-    text-align:center;
-
-    color:#777;
-    font-size:10px;
-    letter-spacing:2px;
+  text-align:center;
+  padding:40px 20px;
+  border-top:1px solid rgba(255,255,255,.1);
+  color:#777;
 }
 
-/* Mobile */
-@media(max-width:600px){
+footer strong{
+  color:#00ffff;
+}
 
-    nav{
-        padding:15px 5%;
-    }
+/* MOBILE */
+@media(max-width:700px){
 
-    .brand{
-        font-size:17px;
-    }
+  nav{
+    padding:15px 4%;
+  }
 
-    .nav-btn{
-        padding:8px 13px;
-        font-size:11px;
-    }
+  nav .links{
+    display:none;
+  }
 
-    .logo{
-        width:145px;
-    }
+  .hero-card{
+    padding:55px 18px;
+  }
 
-    .subtitle{
-        font-size:10px;
-        letter-spacing:4px;
-    }
+  .hero h1{
+    letter-spacing:4px;
+  }
 
-    .title{
-        letter-spacing:4px;
-    }
+  section{
+    padding:75px 5%;
+  }
 
-    .card{
-        width:145px;
-        padding:18px 10px;
-    }
-
-    .enter{
-        padding:15px 35px;
-    }
+  .title{
+    font-size:32px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="background"></div>
-<div class="glow"></div>
+<div class="particles"></div>
 
+<!-- NAVIGATION -->
 <nav>
-    <div class="brand">HAZARD 69</div>
+  <div class="logo">HAZARD 69</div>
 
-    <a href="#official" class="nav-btn">
-        OFFICIAL
-    </a>
+  <div class="links">
+    <a href="#home">HOME</a>
+    <a href="#about">ABOUT</a>
+    <a href="#photos">PHOTOS</a>
+    <a href="#videos">VIDEOS</a>
+    <a href="#social">SOCIAL</a>
+  </div>
 </nav>
 
-<section class="hero" id="official">
+<!-- HERO -->
+<section class="hero" id="home">
 
-    <div class="content">
+  <div class="hero-card">
 
-        <!-- YOUR LOGO -->
-        <img src="logo.png" class="logo" alt="HAZARD 69 Logo">
+    <h1>HAZARD 69</h1>
 
-        <div class="subtitle">
-            WELCOME TO THE
-        </div>
+    <p>
+      WELCOME TO THE OFFICIAL HAZARD 69 EXPERIENCE.
+      Explore photos, videos, social media and more
+      inside a premium 3D interface.
+    </p>
 
-        <div class="title">
-            HAZARD 69
-        </div>
+    <a href="#about" class="enter-btn">
+      ENTER WEBSITE
+    </a>
 
-        <p style="color:#aaa;font-size:13px;margin-top:10px;">
-            OFFICIAL DIGITAL EXPERIENCE
-        </p>
-
-        <a href="#" class="enter">
-            ENTER WEBSITE
-        </a>
-
-        <div class="cards">
-
-            <div class="card">
-                <div class="card-icon">⚡</div>
-                <h3>OFFICIAL</h3>
-                <p>Official HAZARD 69 website</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🔥</div>
-                <h3>PREMIUM</h3>
-                <p>Exclusive digital experience</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🌐</div>
-                <h3>CONNECT</h3>
-                <p>Follow us online</p>
-            </div>
-
-        </div>
-
-        <!-- SOCIAL LINKS -->
-        <div class="social">
-
-            <a href="https://www.instagram.com/hazard_69_official/"
-               target="_blank">IG</a>
-
-            <a href="#" target="_blank">YT</a>
-
-            <a href="#" target="_blank">TG</a>
-
-        </div>
-
-    </div>
+  </div>
 
 </section>
 
+
+<!-- ABOUT -->
+<section id="about">
+
+  <h2 class="title">
+    ABOUT <span>HAZARD 69</span>
+  </h2>
+
+  <div class="about">
+
+    <p>
+      Welcome to HAZARD 69 Official Website.
+      This is your premium digital space for photos,
+      videos, updates and social media.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- PHOTO GALLERY -->
+<section id="photos">
+
+  <h2 class="title">
+    PHOTO <span>GALLERY</span>
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="YOUR-IMAGE-1.jpg" alt="HAZARD 69 Photo">
+      <h3>PHOTO 01</h3>
+      <p>HAZARD 69 official gallery.</p>
+    </div>
+
+    <div class="card">
+      <img src="YOUR-IMAGE-2.jpg" alt="HAZARD 69 Photo">
+      <h3>PHOTO 02</h3>
+      <p>Premium collection.</p>
+    </div>
+
+    <div class="card">
+      <img src="YOUR-IMAGE-3.jpg" alt="HAZARD 69 Photo">
+      <h3>PHOTO 03</h3>
+      <p>Latest updates.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- VIDEO GALLERY -->
+<section id="videos">
+
+  <h2 class="title">
+    VIDEO <span>GALLERY</span>
+  </h2>
+
+  <div class="grid">
+
+    <div class="card">
+
+      <video controls poster="YOUR-VIDEO-POSTER.jpg">
+        <source src="YOUR-VIDEO.mp4" type="video/mp4">
+        Your browser does not support video.
+      </video>
+
+      <h3>FEATURED VIDEO</h3>
+      <p>HAZARD 69 official video.</p>
+
+    </div>
+
+    <div class="card">
+
+      <video controls>
+        <source src="YOUR-VIDEO-2.mp4" type="video/mp4">
+      </video>
+
+      <h3>LATEST VIDEO</h3>
+      <p>Latest HAZARD 69 content.</p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SOCIAL MEDIA -->
+<section id="social">
+
+  <h2 class="title">
+    SOCIAL <span>MEDIA</span>
+  </h2>
+
+  <div class="social">
+
+    <!-- Replace these URLs -->
+
+    <a href="https://instagram.com/" target="_blank">
+      Instagram
+    </a>
+
+    <a href="https://youtube.com/" target="_blank">
+      YouTube
+    </a>
+
+    <a href="https://facebook.com/" target="_blank">
+      Facebook
+    </a>
+
+    <a href="https://t.me/" target="_blank">
+      Telegram
+    </a>
+
+    <a href="https://x.com/" target="_blank">
+      X / Twitter
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
 <footer>
-    © 2026 HAZARD 69 • OFFICIAL WEBSITE
+
+  © 2026 <strong>HAZARD 69</strong> — OFFICIAL WEBSITE
+
 </footer>
+
 
 <!-- MUSIC -->
 <audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
+  <source src="YOUR-MUSIC.mp3" type="audio/mpeg">
 </audio>
 
-<button class="music" onclick="toggleMusic()" id="musicBtn">
-    🔇
-</button>
+<div class="music">
+  <button onclick="toggleMusic()" id="musicBtn">
+    ♪
+  </button>
+</div>
+
 
 <script>
 
 const music = document.getElementById("music");
-const btn = document.getElementById("musicBtn");
+const musicBtn = document.getElementById("musicBtn");
 
-/* Try autoplay */
-window.addEventListener("load",()=>{
-    music.volume = 0.35;
+let playing = false;
 
-    music.play().then(()=>{
-        btn.innerHTML="🔊";
-    }).catch(()=>{
-        btn.innerHTML="🔇";
-    });
-});
-
-/* Music toggle */
 function toggleMusic(){
 
-    if(music.paused){
-        music.play();
-        btn.innerHTML="🔊";
-    }else{
-        music.pause();
-        btn.innerHTML="🔇";
-    }
+  if(playing){
+
+    music.pause();
+    musicBtn.innerHTML="♪";
+    playing=false;
+
+  }else{
+
+    music.play().catch(()=>{});
+    musicBtn.innerHTML="❚❚";
+    playing=true;
+
+  }
 
 }
+
+
+/* 3D Mouse Effect */
+
+document.querySelectorAll(".card").forEach(card=>{
+
+  card.addEventListener("mousemove",(e)=>{
+
+    const rect=card.getBoundingClientRect();
+
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+
+    const rotateY=(x/rect.width-.5)*12;
+    const rotateX=(y/rect.height-.5)*-12;
+
+    card.style.transform=
+      `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+
+  });
+
+  card.addEventListener("mouseleave",()=>{
+
+    card.style.transform="";
+
+  });
+
+});
+
+
+/* Reveal Animation */
+
+const observer=new IntersectionObserver(
+(entries)=>{
+
+  entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+
+      entry.target.style.opacity="1";
+      entry.target.style.transform="translateY(0)";
+
+    }
+
+  });
+
+},{threshold:.15});
+
+
+document.querySelectorAll(".card,.about,.title").forEach(el=>{
+
+  el.style.opacity="0";
+  el.style.transform="translateY(40px)";
+  el.style.transition="1s";
+
+  observer.observe(el);
+
+});
 
 </script>
 
