@@ -3,9 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HAZARD 69 | OFFICIAL</title>
+<meta name="theme-color" content="#050509">
+
+<title>HAZARD 69 — OFFICIAL</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
 *{
   margin:0;
   padding:0;
@@ -13,341 +17,716 @@
   scroll-behavior:smooth;
 }
 
+:root{
+  --cyan:#00f6ff;
+  --purple:#8b35ff;
+  --pink:#ff2bd6;
+  --bg:#030309;
+  --glass:rgba(255,255,255,.055);
+}
+
+html{
+  background:var(--bg);
+}
+
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#03030a;
-  color:white;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(0,246,255,.08),transparent 28%),
+    radial-gradient(circle at 80% 80%,rgba(139,53,255,.10),transparent 30%),
+    #030309;
+  color:#fff;
+  font-family:Orbitron,Arial,sans-serif;
   overflow-x:hidden;
 }
 
-/* Animated Background */
-body::before{
-  content:"";
+/* =========================
+   CINEMATIC LOADER
+========================= */
+
+#loader{
   position:fixed;
   inset:0;
-  z-index:-3;
+  z-index:99999;
+  background:#020207;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  transition:1.2s ease;
+}
+
+.loader-bg{
+  position:absolute;
+  inset:-20%;
   background:
-    radial-gradient(circle at 20% 20%,rgba(0,255,255,.15),transparent 30%),
-    radial-gradient(circle at 80% 70%,rgba(140,0,255,.18),transparent 35%),
-    linear-gradient(135deg,#02020a,#090014,#000);
+    radial-gradient(circle,#00f6ff22 0,transparent 25%),
+    radial-gradient(circle at 80% 70%,#8b35ff20,transparent 30%);
+  filter:blur(10px);
+  animation:loaderMove 8s linear infinite alternate;
 }
 
-.particles{
+@keyframes loaderMove{
+  from{transform:scale(1) rotate(0deg)}
+  to{transform:scale(1.25) rotate(12deg)}
+}
+
+.loader-content{
+  position:relative;
+  text-align:center;
+  z-index:2;
+}
+
+.loader-logo{
+  font-size:clamp(50px,12vw,130px);
+  font-weight:900;
+  letter-spacing:12px;
+  color:#fff;
+  text-shadow:
+    0 0 10px var(--cyan),
+    0 0 30px var(--cyan),
+    0 0 70px var(--purple);
+  animation:logoReveal 2.5s ease forwards;
+}
+
+@keyframes logoReveal{
+  0%{
+    opacity:0;
+    transform:scale(.4);
+    filter:blur(25px);
+  }
+  60%{
+    opacity:1;
+    transform:scale(1.08);
+  }
+  100%{
+    transform:scale(1);
+    filter:blur(0);
+  }
+}
+
+.loader-line{
+  width:min(400px,70vw);
+  height:2px;
+  margin:25px auto;
+  background:#222;
+  overflow:hidden;
+}
+
+.loader-line span{
+  display:block;
+  width:0;
+  height:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  box-shadow:0 0 20px var(--cyan);
+  animation:loading 3s ease forwards;
+}
+
+@keyframes loading{
+  to{width:100%}
+}
+
+.loader-text{
+  font-size:11px;
+  letter-spacing:5px;
+  color:#888;
+}
+
+/* =========================
+   PARTICLES
+========================= */
+
+#particles{
   position:fixed;
   inset:0;
-  z-index:-2;
   pointer-events:none;
-  background-image:
-    radial-gradient(circle,#00ffff 1px,transparent 1px),
-    radial-gradient(circle,#9d00ff 1px,transparent 1px);
-  background-size:80px 80px,120px 120px;
-  animation:moveParticles 18s linear infinite;
-  opacity:.25;
+  z-index:-1;
 }
 
-@keyframes moveParticles{
-  from{transform:translateY(0)}
-  to{transform:translateY(-120px)}
+.particle{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.5;
+  box-shadow:0 0 8px var(--cyan);
+  animation:particleFloat linear infinite;
 }
 
-/* NAVBAR */
+@keyframes particleFloat{
+  from{
+    transform:translateY(110vh);
+  }
+  to{
+    transform:translateY(-10vh);
+  }
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
 nav{
   position:fixed;
   top:0;
   left:0;
   width:100%;
-  z-index:1000;
+  z-index:9000;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 6%;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid rgba(0,255,255,.15);
+  padding:20px 6%;
+  background:rgba(2,2,7,.45);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.logo{
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:3px;
-  color:#fff;
-  text-shadow:0 0 10px #00ffff,0 0 25px #9d00ff;
-}
-
-nav a{
+.nav-logo{
   color:white;
   text-decoration:none;
-  margin-left:22px;
-  font-size:14px;
+  font-weight:900;
+  letter-spacing:4px;
+  font-size:20px;
+  text-shadow:0 0 15px var(--cyan);
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  color:#aaa;
+  text-decoration:none;
+  font-size:11px;
+  letter-spacing:1px;
   transition:.3s;
 }
 
-nav a:hover{
-  color:#00ffff;
-  text-shadow:0 0 15px #00ffff;
+.nav-links a:hover{
+  color:#fff;
+  text-shadow:0 0 15px var(--cyan);
 }
 
-/* HERO */
+.menu{
+  display:none;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* =========================
+   HERO
+========================= */
+
 .hero{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  padding:120px 6% 70px;
+  position:relative;
   text-align:center;
-  padding:100px 20px 50px;
-  perspective:1200px;
+  perspective:1400px;
 }
 
-.hero-card{
-  width:min(950px,94%);
-  padding:70px 30px;
-  border:1px solid rgba(0,255,255,.25);
-  border-radius:35px;
-  background:rgba(255,255,255,.04);
-  backdrop-filter:blur(18px);
+.hero-glow{
+  position:absolute;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  background:var(--cyan);
+  filter:blur(180px);
+  opacity:.08;
+}
+
+.hero-box{
+  position:relative;
+  width:min(1100px,100%);
+  padding:80px 30px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:40px;
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.015)
+  );
+  backdrop-filter:blur(20px);
   box-shadow:
-    0 0 50px rgba(0,255,255,.12),
-    inset 0 0 40px rgba(140,0,255,.08);
+    0 30px 100px #000,
+    inset 0 0 60px rgba(0,246,255,.025);
   transform-style:preserve-3d;
-  animation:float 5s ease-in-out infinite;
 }
 
-@keyframes float{
-  0%,100%{transform:rotateX(1deg) rotateY(-1deg) translateY(0)}
-  50%{transform:rotateX(-2deg) rotateY(2deg) translateY(-12px)}
+.badge{
+  display:inline-block;
+  padding:9px 18px;
+  border:1px solid rgba(0,246,255,.4);
+  border-radius:50px;
+  color:var(--cyan);
+  font-size:10px;
+  letter-spacing:3px;
+  margin-bottom:25px;
+  box-shadow:0 0 20px #00f6ff15;
 }
 
 .hero h1{
-  font-size:clamp(55px,12vw,125px);
-  font-weight:1000;
+  font-size:clamp(55px,12vw,150px);
+  line-height:.9;
+  font-weight:900;
   letter-spacing:8px;
-  background:linear-gradient(90deg,#00ffff,#fff,#a000ff,#00ffff);
+  background:linear-gradient(
+    90deg,
+    #fff,
+    var(--cyan),
+    #fff,
+    var(--purple),
+    #fff
+  );
   background-size:300%;
   -webkit-background-clip:text;
   color:transparent;
-  animation:gradient 5s linear infinite;
-  text-shadow:0 0 30px rgba(0,255,255,.2);
+  animation:gradientMove 7s linear infinite;
 }
 
-@keyframes gradient{
-  0%{background-position:0%}
-  100%{background-position:300%}
+@keyframes gradientMove{
+  to{background-position:300%}
 }
 
-.hero p{
-  margin:20px auto 35px;
-  color:#bbb;
-  max-width:650px;
-  line-height:1.7;
+.hero-sub{
+  max-width:720px;
+  margin:30px auto;
+  color:#999;
+  font-size:13px;
+  line-height:2;
 }
 
-.enter-btn{
-  display:inline-block;
-  padding:16px 40px;
+.enter{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:17px 35px;
+  min-width:220px;
   border-radius:50px;
-  color:white;
+  color:#fff;
   text-decoration:none;
-  font-weight:bold;
+  font-size:12px;
+  font-weight:700;
   letter-spacing:2px;
-  border:1px solid #00ffff;
-  background:linear-gradient(90deg,#00ffff22,#9d00ff33);
-  box-shadow:0 0 20px #00ffff55;
+  border:1px solid var(--cyan);
+  background:linear-gradient(90deg,#00f6ff12,#8b35ff15);
+  box-shadow:
+    0 0 20px #00f6ff22,
+    inset 0 0 20px #00f6ff08;
   transition:.4s;
 }
 
-.enter-btn:hover{
-  transform:translateY(-5px) scale(1.05);
-  box-shadow:0 0 30px #00ffff,0 0 70px #9d00ff;
+.enter:hover{
+  transform:translateY(-6px) scale(1.04);
+  box-shadow:
+    0 0 30px #00f6ff66,
+    0 0 80px #8b35ff44;
 }
 
-/* SECTIONS */
+/* =========================
+   SECTIONS
+========================= */
+
 section{
-  padding:100px 7%;
+  padding:110px 7%;
 }
 
-.title{
+.section-head{
   text-align:center;
-  font-size:42px;
-  margin-bottom:50px;
-  letter-spacing:3px;
+  margin-bottom:55px;
 }
 
-.title span{
-  color:#00ffff;
-  text-shadow:0 0 15px #00ffff;
+.section-head small{
+  color:var(--cyan);
+  letter-spacing:4px;
+  font-size:10px;
 }
 
-/* 3D CARDS */
+.section-head h2{
+  font-size:clamp(30px,5vw,55px);
+  margin-top:12px;
+}
+
+.section-head h2 span{
+  color:var(--cyan);
+  text-shadow:0 0 20px #00f6ff55;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+/* =========================
+   3D CARDS
+========================= */
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
-  perspective:1000px;
+  gap:25px;
 }
 
 .card{
+  position:relative;
+  min-height:220px;
   padding:25px;
-  min-height:230px;
-  border-radius:25px;
-  background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 20px 50px rgba(0,0,0,.4);
-  transition:.45s;
+  border-radius:28px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.09);
+  background:linear-gradient(
+    145deg,
+    rgba(255,255,255,.07),
+    rgba(255,255,255,.018)
+  );
+  backdrop-filter:blur(16px);
+  box-shadow:0 25px 60px rgba(0,0,0,.45);
   transform-style:preserve-3d;
+  transition:.2s ease;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  background:var(--cyan);
+  filter:blur(100px);
+  opacity:.07;
+  top:-80px;
+  right:-80px;
 }
 
 .card:hover{
-  transform:rotateX(6deg) rotateY(-6deg) translateY(-12px);
-  border-color:#00ffff;
-  box-shadow:0 20px 50px rgba(0,255,255,.2);
+  border-color:#00f6ff55;
+  box-shadow:
+    0 30px 70px #000,
+    0 0 30px #00f6ff12;
+}
+
+.card h3{
+  margin:15px 0 10px;
+  font-size:17px;
+}
+
+.card p{
+  color:#888;
+  font-size:12px;
+  line-height:1.8;
 }
 
 .card img,
 .card video{
   width:100%;
-  border-radius:18px;
   display:block;
-  margin-bottom:18px;
+  border-radius:20px;
+  object-fit:cover;
 }
 
-.card h3{
-  font-size:22px;
-  margin-bottom:10px;
+/* =========================
+   APP / APK
+========================= */
+
+.app-card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+  padding:45px;
+  border:1px solid rgba(0,246,255,.18);
+  border-radius:35px;
+  background:linear-gradient(
+    120deg,
+    rgba(0,246,255,.05),
+    rgba(139,53,255,.05)
+  );
+  box-shadow:0 30px 80px #000;
 }
 
-.card p{
-  color:#aaa;
-  line-height:1.6;
+.app-info h2{
+  font-size:40px;
+  margin-bottom:20px;
 }
 
-/* ABOUT */
-.about{
-  max-width:900px;
-  margin:auto;
-  text-align:center;
-  color:#bbb;
-  line-height:1.9;
-  font-size:17px;
+.app-info p{
+  color:#999;
+  line-height:2;
+  font-size:13px;
+  margin-bottom:25px;
 }
 
-/* SOCIAL */
+.download{
+  display:inline-block;
+  padding:15px 25px;
+  color:#fff;
+  text-decoration:none;
+  border-radius:50px;
+  background:linear-gradient(90deg,#00a8ff,#793cff);
+  box-shadow:0 0 30px #693cff33;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.app-visual{
+  min-height:300px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.phone{
+  width:190px;
+  height:340px;
+  border-radius:30px;
+  border:2px solid #ffffff22;
+  background:
+    linear-gradient(145deg,#101020,#030309);
+  box-shadow:
+    0 0 40px #00f6ff22,
+    inset 0 0 30px #8b35ff15;
+  transform:rotateY(-18deg) rotateX(5deg);
+}
+
+/* =========================
+   SOCIAL
+========================= */
+
 .social{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
-  gap:18px;
+  gap:15px;
 }
 
 .social a{
-  text-decoration:none;
-  color:white;
-  padding:15px 25px;
-  border:1px solid rgba(255,255,255,.2);
+  min-width:150px;
+  padding:17px 22px;
   border-radius:50px;
-  background:rgba(255,255,255,.05);
-  transition:.4s;
+  text-decoration:none;
+  color:#fff;
+  text-align:center;
+  font-size:11px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.035);
+  transition:.35s;
 }
 
 .social a:hover{
-  transform:translateY(-7px);
-  border-color:#00ffff;
-  box-shadow:0 0 25px #00ffff66;
+  transform:translateY(-6px);
+  border-color:var(--cyan);
+  box-shadow:0 0 25px #00f6ff22;
 }
 
-/* MUSIC */
-.music{
+/* =========================
+   MUSIC
+========================= */
+
+.music-control{
   position:fixed;
   right:20px;
   bottom:20px;
-  z-index:999;
+  z-index:9500;
 }
 
-.music button{
+.music-control button{
   width:55px;
   height:55px;
   border-radius:50%;
-  border:1px solid #00ffff;
-  background:#05050d;
-  color:#00ffff;
-  font-size:22px;
+  border:1px solid var(--cyan);
+  background:rgba(0,0,0,.7);
+  color:var(--cyan);
+  font-size:18px;
   cursor:pointer;
-  box-shadow:0 0 20px #00ffff66;
+  box-shadow:0 0 25px #00f6ff33;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
+
 footer{
+  padding:50px 20px;
   text-align:center;
-  padding:40px 20px;
-  border-top:1px solid rgba(255,255,255,.1);
-  color:#777;
+  border-top:1px solid rgba(255,255,255,.07);
+  color:#666;
+  font-size:10px;
+  letter-spacing:2px;
 }
 
 footer strong{
-  color:#00ffff;
+  color:var(--cyan);
 }
 
-/* MOBILE */
-@media(max-width:700px){
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:750px){
 
   nav{
-    padding:15px 4%;
+    padding:17px 5%;
   }
 
-  nav .links{
+  .nav-links{
+    position:absolute;
+    top:70px;
+    right:5%;
     display:none;
+    flex-direction:column;
+    width:200px;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(5,5,12,.95);
+    border:1px solid rgba(255,255,255,.1);
   }
 
-  .hero-card{
-    padding:55px 18px;
+  .nav-links.active{
+    display:flex;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .hero-box{
+    padding:65px 20px;
   }
 
   .hero h1{
-    letter-spacing:4px;
+    font-size:17vw;
+    letter-spacing:3px;
   }
 
   section{
-    padding:75px 5%;
+    padding:80px 5%;
   }
 
-  .title{
-    font-size:32px;
+  .app-card{
+    grid-template-columns:1fr;
+    padding:30px 20px;
+  }
+
+  .app-info h2{
+    font-size:30px;
+  }
+
+  .phone{
+    transform:none;
   }
 }
 </style>
 </head>
 
+
 <body>
 
-<div class="particles"></div>
+<!-- =========================
+     LOADING SCREEN
+========================= -->
 
-<!-- NAVIGATION -->
+<div id="loader">
+
+  <div class="loader-bg"></div>
+
+  <div class="loader-content">
+
+    <div class="loader-logo">
+      HAZARD 69
+    </div>
+
+    <div class="loader-line">
+      <span></span>
+    </div>
+
+    <div class="loader-text">
+      INITIALIZING EXPERIENCE
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- PARTICLES -->
+
+<div id="particles"></div>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
 <nav>
-  <div class="logo">HAZARD 69</div>
 
-  <div class="links">
+  <a href="#home" class="nav-logo">
+    H69
+  </a>
+
+  <div class="nav-links" id="navLinks">
+
     <a href="#home">HOME</a>
     <a href="#about">ABOUT</a>
-    <a href="#photos">PHOTOS</a>
+    <a href="#gallery">PHOTOS</a>
     <a href="#videos">VIDEOS</a>
+    <a href="#app">APP</a>
     <a href="#social">SOCIAL</a>
+
   </div>
+
+  <div class="menu" onclick="toggleMenu()">
+    ☰
+  </div>
+
 </nav>
 
-<!-- HERO -->
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero" id="home">
 
-  <div class="hero-card">
+  <div class="hero-glow"></div>
+
+  <div class="hero-box" id="heroBox">
+
+    <div class="badge">
+      OFFICIAL DIGITAL EXPERIENCE
+    </div>
 
     <h1>HAZARD 69</h1>
 
-    <p>
-      WELCOME TO THE OFFICIAL HAZARD 69 EXPERIENCE.
-      Explore photos, videos, social media and more
-      inside a premium 3D interface.
+    <p class="hero-sub">
+
+      ENTER A NEW DIGITAL EXPERIENCE.
+      Explore the official HAZARD 69 world —
+      photos, videos, apps, updates and social media
+      inside a cinematic 3D interface.
+
     </p>
 
-    <a href="#about" class="enter-btn">
-      ENTER WEBSITE
+    <a href="#about" class="enter">
+      ENTER EXPERIENCE
     </a>
 
   </div>
@@ -355,51 +734,37 @@ footer strong{
 </section>
 
 
-<!-- ABOUT -->
+<!-- =========================
+     ABOUT
+========================= -->
+
 <section id="about">
 
-  <h2 class="title">
-    ABOUT <span>HAZARD 69</span>
-  </h2>
+  <div class="container reveal">
 
-  <div class="about">
+    <div class="section-head">
 
-    <p>
-      Welcome to HAZARD 69 Official Website.
-      This is your premium digital space for photos,
-      videos, updates and social media.
-    </p>
+      <small>WELCOME TO</small>
 
-  </div>
+      <h2>
+        HAZARD <span>69</span>
+      </h2>
 
-</section>
-
-
-<!-- PHOTO GALLERY -->
-<section id="photos">
-
-  <h2 class="title">
-    PHOTO <span>GALLERY</span>
-  </h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <img src="YOUR-IMAGE-1.jpg" alt="HAZARD 69 Photo">
-      <h3>PHOTO 01</h3>
-      <p>HAZARD 69 official gallery.</p>
     </div>
 
-    <div class="card">
-      <img src="YOUR-IMAGE-2.jpg" alt="HAZARD 69 Photo">
-      <h3>PHOTO 02</h3>
-      <p>Premium collection.</p>
-    </div>
+    <div class="card" style="text-align:center">
 
-    <div class="card">
-      <img src="YOUR-IMAGE-3.jpg" alt="HAZARD 69 Photo">
-      <h3>PHOTO 03</h3>
-      <p>Latest updates.</p>
+      <h3>THE OFFICIAL EXPERIENCE</h3>
+
+      <p>
+
+        Welcome to HAZARD 69 Official.
+        This premium website is designed as a central
+        place for your photos, videos, applications,
+        updates and social-media presence.
+
+      </p>
+
     </div>
 
   </div>
@@ -407,35 +772,138 @@ footer strong{
 </section>
 
 
-<!-- VIDEO GALLERY -->
+<!-- =========================
+     PHOTO GALLERY
+========================= -->
+
+<section id="gallery">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <small>VISUAL COLLECTION</small>
+
+      <h2>
+        PHOTO <span>GALLERY</span>
+      </h2>
+
+    </div>
+
+    <div class="grid">
+
+      <div class="card tilt reveal">
+
+        <img
+          src="YOUR-IMAGE-1.jpg"
+          alt="HAZARD 69"
+        >
+
+        <h3>FEATURED</h3>
+
+        <p>
+          Replace this image with your own photo.
+        </p>
+
+      </div>
+
+
+      <div class="card tilt reveal">
+
+        <img
+          src="YOUR-IMAGE-2.jpg"
+          alt="HAZARD 69"
+        >
+
+        <h3>COLLECTION 02</h3>
+
+        <p>
+          Add unlimited images by duplicating cards.
+        </p>
+
+      </div>
+
+
+      <div class="card tilt reveal">
+
+        <img
+          src="YOUR-IMAGE-3.jpg"
+          alt="HAZARD 69"
+        >
+
+        <h3>COLLECTION 03</h3>
+
+        <p>
+          Your premium photo gallery.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     VIDEOS
+========================= -->
+
 <section id="videos">
 
-  <h2 class="title">
-    VIDEO <span>GALLERY</span>
-  </h2>
+  <div class="container">
 
-  <div class="grid">
+    <div class="section-head reveal">
 
-    <div class="card">
+      <small>CINEMATIC MEDIA</small>
 
-      <video controls poster="YOUR-VIDEO-POSTER.jpg">
-        <source src="YOUR-VIDEO.mp4" type="video/mp4">
-        Your browser does not support video.
-      </video>
-
-      <h3>FEATURED VIDEO</h3>
-      <p>HAZARD 69 official video.</p>
+      <h2>
+        VIDEO <span>ZONE</span>
+      </h2>
 
     </div>
 
-    <div class="card">
+    <div class="grid">
 
-      <video controls>
-        <source src="YOUR-VIDEO-2.mp4" type="video/mp4">
-      </video>
+      <div class="card reveal">
 
-      <h3>LATEST VIDEO</h3>
-      <p>Latest HAZARD 69 content.</p>
+        <video controls poster="YOUR-POSTER.jpg">
+
+          <source
+            src="YOUR-VIDEO.mp4"
+            type="video/mp4"
+          >
+
+        </video>
+
+        <h3>FEATURED VIDEO</h3>
+
+        <p>
+          Replace the video with your own MP4.
+        </p>
+
+      </div>
+
+
+      <div class="card reveal">
+
+        <video controls>
+
+          <source
+            src="YOUR-VIDEO-2.mp4"
+            type="video/mp4"
+          >
+
+        </video>
+
+        <h3>LATEST VIDEO</h3>
+
+        <p>
+          Add more videos whenever you want.
+        </p>
+
+      </div>
 
     </div>
 
@@ -444,144 +912,441 @@ footer strong{
 </section>
 
 
-<!-- SOCIAL MEDIA -->
+<!-- =========================
+     APP / APK
+========================= -->
+
+<section id="app">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <small>APPLICATION CENTER</small>
+
+      <h2>
+        HAZARD <span>APP</span>
+      </h2>
+
+    </div>
+
+
+    <div class="app-card reveal">
+
+      <div class="app-info">
+
+        <h2>
+          YOUR APP
+        </h2>
+
+        <p>
+
+          Put your APK, application or other downloadable
+          files here. Replace the button link with your
+          actual download URL.
+
+        </p>
+
+        <a
+          class="download"
+          href="YOUR-APK-LINK"
+          target="_blank"
+        >
+          DOWNLOAD APP
+        </a>
+
+      </div>
+
+
+      <div class="app-visual">
+
+        <div class="phone"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     UPDATES
+========================= -->
+
+<section id="updates">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <small>LATEST INFORMATION</small>
+
+      <h2>
+        NEWS & <span>UPDATES</span>
+      </h2>
+
+    </div>
+
+
+    <div class="grid">
+
+      <div class="card reveal">
+
+        <h3>UPDATE 01</h3>
+
+        <p>
+          Add your latest announcement here.
+        </p>
+
+      </div>
+
+
+      <div class="card reveal">
+
+        <h3>UPDATE 02</h3>
+
+        <p>
+          Add website or app updates here.
+        </p>
+
+      </div>
+
+
+      <div class="card reveal">
+
+        <h3>UPDATE 03</h3>
+
+        <p>
+          Add your newest content here.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SOCIAL MEDIA
+========================= -->
+
 <section id="social">
 
-  <h2 class="title">
-    SOCIAL <span>MEDIA</span>
-  </h2>
+  <div class="container">
 
-  <div class="social">
+    <div class="section-head reveal">
 
-    <!-- Replace these URLs -->
+      <small>CONNECT WITH US</small>
 
-    <a href="https://instagram.com/" target="_blank">
-      Instagram
-    </a>
+      <h2>
+        SOCIAL <span>MEDIA</span>
+      </h2>
 
-    <a href="https://youtube.com/" target="_blank">
-      YouTube
-    </a>
+    </div>
 
-    <a href="https://facebook.com/" target="_blank">
-      Facebook
-    </a>
 
-    <a href="https://t.me/" target="_blank">
-      Telegram
-    </a>
+    <div class="social reveal">
 
-    <a href="https://x.com/" target="_blank">
-      X / Twitter
-    </a>
+      <a
+        href="YOUR-INSTAGRAM-LINK"
+        target="_blank"
+      >
+        INSTAGRAM
+      </a>
+
+
+      <a
+        href="YOUR-YOUTUBE-LINK"
+        target="_blank"
+      >
+        YOUTUBE
+      </a>
+
+
+      <a
+        href="YOUR-FACEBOOK-LINK"
+        target="_blank"
+      >
+        FACEBOOK
+      </a>
+
+
+      <a
+        href="YOUR-TELEGRAM-LINK"
+        target="_blank"
+      >
+        TELEGRAM
+      </a>
+
+
+      <a
+        href="YOUR-X-LINK"
+        target="_blank"
+      >
+        X / TWITTER
+      </a>
+
+    </div>
 
   </div>
 
 </section>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-  © 2026 <strong>HAZARD 69</strong> — OFFICIAL WEBSITE
+  © 2026
+  <strong>HAZARD 69</strong>
+  — OFFICIAL DIGITAL EXPERIENCE
 
 </footer>
 
 
-<!-- MUSIC -->
+<!-- =========================
+     MUSIC
+========================= -->
+
 <audio id="music" loop>
-  <source src="YOUR-MUSIC.mp3" type="audio/mpeg">
+
+  <source
+    src="YOUR-MUSIC.mp3"
+    type="audio/mpeg"
+  >
+
 </audio>
 
-<div class="music">
-  <button onclick="toggleMusic()" id="musicBtn">
+
+<div class="music-control">
+
+  <button
+    id="musicBtn"
+    onclick="toggleMusic()"
+  >
     ♪
   </button>
+
 </div>
 
 
 <script>
 
-const music = document.getElementById("music");
-const musicBtn = document.getElementById("musicBtn");
+/* =========================
+   LOADER
+========================= */
 
-let playing = false;
+window.addEventListener("load",()=>{
+
+  setTimeout(()=>{
+
+    document.getElementById("loader").style.opacity="0";
+
+    setTimeout(()=>{
+
+      document.getElementById("loader").style.display="none";
+
+    },1200);
+
+  },3500);
+
+});
+
+
+/* =========================
+   PARTICLES
+========================= */
+
+const particleBox=
+document.getElementById("particles");
+
+for(let i=0;i<90;i++){
+
+  const p=document.createElement("div");
+
+  p.className="particle";
+
+  p.style.left=Math.random()*100+"%";
+
+  p.style.animationDuration=
+    (5+Math.random()*12)+"s";
+
+  p.style.animationDelay=
+    Math.random()*10+"s";
+
+  p.style.opacity=
+    .15+Math.random()*.7;
+
+  particleBox.appendChild(p);
+
+}
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+function toggleMenu(){
+
+  document
+    .getElementById("navLinks")
+    .classList.toggle("active");
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
+
+const music=
+document.getElementById("music");
+
+const musicBtn=
+document.getElementById("musicBtn");
+
+let playing=false;
 
 function toggleMusic(){
 
-  if(playing){
+  if(!playing){
 
-    music.pause();
-    musicBtn.innerHTML="♪";
-    playing=false;
+    music.play().then(()=>{
+
+      playing=true;
+      musicBtn.innerHTML="❚❚";
+
+    }).catch(()=>{
+
+      alert(
+        "Tap the music button again to start the music."
+      );
+
+    });
 
   }else{
 
-    music.play().catch(()=>{});
-    musicBtn.innerHTML="❚❚";
-    playing=true;
+    music.pause();
+
+    playing=false;
+
+    musicBtn.innerHTML="♪";
 
   }
 
 }
 
 
-/* 3D Mouse Effect */
+/* =========================
+   SCROLL REVEAL
+========================= */
 
-document.querySelectorAll(".card").forEach(card=>{
-
-  card.addEventListener("mousemove",(e)=>{
-
-    const rect=card.getBoundingClientRect();
-
-    const x=e.clientX-rect.left;
-    const y=e.clientY-rect.top;
-
-    const rotateY=(x/rect.width-.5)*12;
-    const rotateX=(y/rect.height-.5)*-12;
-
-    card.style.transform=
-      `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-
-  });
-
-  card.addEventListener("mouseleave",()=>{
-
-    card.style.transform="";
-
-  });
-
-});
-
-
-/* Reveal Animation */
-
-const observer=new IntersectionObserver(
+const observer=
+new IntersectionObserver(
 (entries)=>{
 
   entries.forEach(entry=>{
 
     if(entry.isIntersecting){
 
-      entry.target.style.opacity="1";
-      entry.target.style.transform="translateY(0)";
+      entry.target.classList.add("show");
 
     }
 
   });
 
-},{threshold:.15});
+},
+{
+  threshold:.12
+});
 
 
-document.querySelectorAll(".card,.about,.title").forEach(el=>{
+document
+  .querySelectorAll(".reveal")
+  .forEach(el=>observer.observe(el));
 
-  el.style.opacity="0";
-  el.style.transform="translateY(40px)";
-  el.style.transition="1s";
 
-  observer.observe(el);
+/* =========================
+   3D TILT
+========================= */
+
+document
+.querySelectorAll(".tilt")
+.forEach(card=>{
+
+  card.addEventListener(
+    "mousemove",
+    (e)=>{
+
+      const rect=
+        card.getBoundingClientRect();
+
+      const x=
+        e.clientX-rect.left;
+
+      const y=
+        e.clientY-rect.top;
+
+      const rotateY=
+        ((x/rect.width)-.5)*14;
+
+      const rotateX=
+        ((y/rect.height)-.5)*-14;
+
+      card.style.transform=
+        `perspective(900px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)
+         translateY(-8px)`;
+
+    }
+  );
+
+
+  card.addEventListener(
+    "mouseleave",
+    ()=>{
+
+      card.style.transform="";
+
+    }
+  );
 
 });
+
+
+/* =========================
+   HERO 3D MOVEMENT
+========================= */
+
+const hero=
+document.getElementById("heroBox");
+
+document.addEventListener(
+  "mousemove",
+  (e)=>{
+
+    if(window.innerWidth<750)return;
+
+    const x=
+      (window.innerWidth/2-e.clientX)/45;
+
+    const y=
+      (window.innerHeight/2-e.clientY)/45;
+
+    hero.style.transform=
+      `rotateY(${-x}deg)
+       rotateX(${y}deg)`;
+
+  }
+);
 
 </script>
 
