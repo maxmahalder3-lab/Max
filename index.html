@@ -4,9 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HAZARD 69 - Official</title>
+<title>HAZARD 69 Official</title>
 
 <style>
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
 *{
     margin:0;
     padding:0;
@@ -15,29 +20,36 @@
 
 html,body{
     width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#000;
+    min-height:100%;
+    background:#05070d;
+    color:white;
     font-family:Arial,Helvetica,sans-serif;
 }
 
-/* =========================
-   ENTRY SCREEN
-========================= */
+body{
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   ENTRY ANIMATION
+===================================================== */
 
 #entryScreen{
     position:fixed;
     inset:0;
-    z-index:9999;
+    z-index:99999;
     overflow:hidden;
     background:#000;
 }
 
-/* PHOTO */
+
+/* ENTRY PHOTO */
 
 .entryPhoto{
     position:absolute;
     inset:-5%;
+
     width:110%;
     height:110%;
 
@@ -80,17 +92,18 @@ html,body{
     background:
         radial-gradient(
             circle at center,
-            transparent 15%,
+            transparent 10%,
             rgba(0,0,0,.35) 50%,
-            rgba(0,0,0,.88) 100%
+            rgba(0,0,0,.9) 100%
         );
 }
 
 
-/* PURPLE LIGHT */
+/* LIGHT EFFECT */
 
 .lightEffect{
     position:absolute;
+
     width:500px;
     height:500px;
 
@@ -103,8 +116,8 @@ html,body{
     background:
         radial-gradient(
             circle,
-            rgba(125,70,255,.28),
-            transparent 65%
+            rgba(125,70,255,.30),
+            transparent 68%
         );
 
     filter:blur(30px);
@@ -125,7 +138,7 @@ html,body{
     }
 
     50%{
-        opacity:.8;
+        opacity:.85;
         transform:
             translate(-50%,-50%)
             scale(1.15);
@@ -133,12 +146,9 @@ html,body{
 }
 
 
-/* =========================
-   CONTENT
-========================= */
+/* ENTRY CONTENT */
 
 .entryContent{
-
     position:absolute;
     inset:0;
 
@@ -156,15 +166,12 @@ html,body{
 }
 
 
-/* SMALL TEXT */
-
 .welcome{
-
     font-size:13px;
 
     letter-spacing:7px;
 
-    color:#d6d6d6;
+    color:#ddd;
 
     margin-bottom:15px;
 
@@ -177,25 +184,14 @@ html,body{
 }
 
 
-/* TITLE */
-
 .title{
-
     font-size:
-        clamp(
-            48px,
-            13vw,
-            125px
-        );
+        clamp(48px,13vw,125px);
 
     font-weight:1000;
 
     letter-spacing:
-        clamp(
-            5px,
-            2vw,
-            18px
-        );
+        clamp(5px,2vw,18px);
 
     color:white;
 
@@ -223,18 +219,11 @@ html,body{
 }
 
 
-/* SUBTITLE */
-
 .subtitle{
-
     margin-top:8px;
 
     font-size:
-        clamp(
-            12px,
-            2vw,
-            18px
-        );
+        clamp(12px,2vw,18px);
 
     letter-spacing:6px;
 
@@ -252,10 +241,9 @@ html,body{
 /* ENTER BUTTON */
 
 .enterButton{
-
     margin-top:42px;
 
-    min-width:210px;
+    min-width:220px;
 
     padding:16px 30px;
 
@@ -278,8 +266,7 @@ html,body{
 
     cursor:pointer;
 
-    backdrop-filter:
-        blur(15px);
+    backdrop-filter:blur(15px);
 
     box-shadow:
         0 0 30px
@@ -292,15 +279,12 @@ html,body{
         1.9s
         forwards;
 
-    transition:
-        .3s;
+    transition:.3s;
 }
 
 
 .enterButton:hover{
-
-    transform:
-        scale(1.06);
+    transform:scale(1.06);
 
     background:
         linear-gradient(
@@ -315,12 +299,9 @@ html,body{
 }
 
 
-/* =========================
-   BOTTOM
-========================= */
+/* ENTRY FOOTER */
 
 .footerText{
-
     position:absolute;
 
     bottom:25px;
@@ -341,22 +322,18 @@ html,body{
 }
 
 
-/* =========================
-   ANIMATIONS
-========================= */
+/* ENTRY ANIMATIONS */
 
 @keyframes fadeUp{
 
     from{
         opacity:0;
-        transform:
-            translateY(25px);
+        transform:translateY(25px);
     }
 
     to{
         opacity:1;
-        transform:
-            translateY(0);
+        transform:translateY(0);
     }
 }
 
@@ -365,32 +342,29 @@ html,body{
 
     0%{
         opacity:0;
+
         transform:
             scale(.7)
             translateY(25px);
 
-        filter:
-            blur(15px);
+        filter:blur(15px);
     }
 
     100%{
         opacity:1;
+
         transform:
             scale(1)
             translateY(0);
 
-        filter:
-            blur(0);
+        filter:blur(0);
     }
 }
 
 
-/* =========================
-   EXIT ANIMATION
-========================= */
+/* ENTRY EXIT */
 
 #entryScreen.exit{
-
     animation:
         exitScreen
         1s
@@ -413,53 +387,379 @@ html,body{
 }
 
 
-/* =========================
+/* =====================================================
    MAIN WEBSITE
-========================= */
+===================================================== */
 
 #mainWebsite{
-
     display:none;
 
-    width:100%;
-    height:100vh;
+    min-height:100vh;
 
     overflow:auto;
 
     background:
-        linear-gradient(
-            135deg,
-            #080b12,
-            #15102b
+        radial-gradient(
+            circle at top,
+            #21154a,
+            #080b12 55%,
+            #05070d
         );
 
     color:white;
 
-    padding:40px;
+    padding-bottom:80px;
+}
+
+
+/* HEADER */
+
+.header{
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 25px;
+
+    background:
+        rgba(5,7,13,.82);
+
+    border-bottom:
+        1px solid
+        #202638;
+
+    backdrop-filter:blur(18px);
+}
+
+
+.logo{
+    font-size:21px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+
+.logo span{
+    color:#8b5cf6;
+}
+
+
+.menuButton{
+    padding:10px 16px;
+
+    border:0;
+
+    border-radius:12px;
+
+    background:#181e2d;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+
+/* MAIN CONTENT */
+
+.content{
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:
+        50px 20px;
+}
+
+
+.heroTitle{
+    text-align:center;
+
+    font-size:
+        clamp(35px,7vw,70px);
+
+    font-weight:900;
+
+    text-shadow:
+        0 0 35px
+        rgba(139,92,246,.5);
+}
+
+
+.heroSubtitle{
+    text-align:center;
+
+    color:#9fa9bd;
+
+    margin-top:12px;
+
+    letter-spacing:3px;
+}
+
+
+/* =====================================================
+   PROFESSIONAL PHOTO CARD
+===================================================== */
+
+.photo-section{
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:60px 20px;
+}
+
+
+.photo-card{
+    position:relative;
+
+    width:
+        min(90vw,600px);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    background:#101522;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.6);
+
+    transform:translateY(0);
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+}
+
+
+.photo-card:hover{
+    transform:
+        translateY(-10px)
+        scale(1.02);
+
+    box-shadow:
+        0 40px 100px
+        rgba(125,70,255,.35);
+}
+
+
+/* PHOTO */
+
+.website-photo{
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    min-height:400px;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    filter:
+        brightness(.8)
+        contrast(1.1)
+        saturate(1.1);
+
+    transition:
+        transform .8s ease,
+        filter .5s ease;
+}
+
+
+.photo-card:hover .website-photo{
+    transform:scale(1.06);
+
+    filter:
+        brightness(.95)
+        contrast(1.15)
+        saturate(1.2);
+}
+
+
+/* PHOTO PURPLE GLOW */
+
+.photo-glow{
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139,92,246,.35),
+            transparent 70%
+        );
+
+    filter:blur(35px);
+
+    pointer-events:none;
+
+    z-index:2;
+}
+
+
+/* PHOTO TEXT */
+
+.photo-overlay{
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:3;
+
+    padding:
+        70px 25px 25px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,.92)
+        );
+}
+
+
+.photo-overlay h2{
+    margin:0;
+
+    color:white;
+
+    font-size:
+        clamp(28px,6vw,45px);
+
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    text-shadow:
+        0 0 20px
+        rgba(139,92,246,.8);
+}
+
+
+.photo-overlay p{
+    margin-top:7px;
+
+    color:#c5b5ff;
+
+    font-size:12px;
+
+    letter-spacing:6px;
+}
+
+
+/* =====================================================
+   INFO CARDS
+===================================================== */
+
+.infoGrid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px,1fr)
+        );
+
+    gap:20px;
+
+    margin-top:30px;
+}
+
+
+.infoCard{
+    padding:25px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151b2a,
+            #0b101a
+        );
+
+    border:
+        1px solid
+        #252e43;
 
     text-align:center;
 }
 
 
-#mainWebsite h1{
+.infoCard .icon{
+    font-size:40px;
 
-    font-size:45px;
-
-    margin-top:80px;
-
+    margin-bottom:12px;
 }
 
 
-#mainWebsite p{
-
-    color:#aab2c5;
-
-    margin-top:15px;
-
+.infoCard h3{
+    margin-bottom:8px;
 }
 
 
-/* MOBILE */
+.infoCard p{
+    color:#9ca7bb;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+    text-align:center;
+
+    padding:30px 20px;
+
+    color:#6f798c;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:600px){
 
@@ -479,39 +779,63 @@ html,body{
         margin-top:35px;
     }
 
+    .header{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:
+            35px 15px;
+    }
+
+    .photo-section{
+        padding:
+            40px 0;
+    }
+
+    .photo-card{
+        width:100%;
+
+        border-radius:22px;
+    }
+
+    .website-photo{
+        min-height:350px;
+    }
+
+    .photo-overlay h2{
+        letter-spacing:3px;
+    }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
 
-<!-- ==================================
+<!-- =====================================================
      ENTRY ANIMATION
-================================== -->
+===================================================== -->
 
 <div id="entryScreen">
 
-    <!-- YOUR PHOTO -->
+
+    <!-- তোমার পাঠানো ছবি -->
 
     <img
-        src="entry-photo.jpg"
+        src="photo.jpg"
         class="entryPhoto"
         alt="HAZARD 69 Entry"
     >
 
 
-    <!-- DARK CINEMATIC OVERLAY -->
-
     <div class="darkOverlay"></div>
-
-
-    <!-- LIGHT EFFECT -->
 
     <div class="lightEffect"></div>
 
-
-    <!-- CONTENT -->
 
     <div class="entryContent">
 
@@ -548,25 +872,181 @@ html,body{
 
 
 
-<!-- ==================================
+<!-- =====================================================
      MAIN WEBSITE
-================================== -->
+===================================================== -->
 
 <div id="mainWebsite">
 
-    <h1>
-        HAZARD 69
-    </h1>
 
-    <p>
-        Welcome to the Official Website
-    </p>
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+            HAZARD <span>69</span>
+        </div>
+
+        <button
+            class="menuButton"
+            onclick="window.scrollTo({
+                top:0,
+                behavior:'smooth'
+            })"
+        >
+            HOME
+        </button>
+
+    </header>
+
+
+
+    <!-- CONTENT -->
+
+    <main class="content">
+
+
+        <h1 class="heroTitle">
+            HAZARD 69
+        </h1>
+
+
+        <p class="heroSubtitle">
+            OFFICIAL WEBSITE
+        </p>
+
+
+
+        <!-- =================================================
+             PHOTO
+        ================================================== -->
+
+        <section class="photo-section">
+
+            <div class="photo-card">
+
+
+                <!-- PURPLE GLOW -->
+
+                <div class="photo-glow"></div>
+
+
+                <!-- PHOTO -->
+
+                <img
+                    src="photo.jpg"
+                    alt="HAZARD 69"
+                    class="website-photo"
+                >
+
+
+                <!-- PHOTO TEXT -->
+
+                <div class="photo-overlay">
+
+                    <h2>
+                        HAZARD 69
+                    </h2>
+
+                    <p>
+                        OFFICIAL
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INFO
+        ================================================== -->
+
+        <div class="infoGrid">
+
+
+            <div class="infoCard">
+
+                <div class="icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    HAZARD 69
+                </h3>
+
+                <p>
+                    Official website and
+                    digital platform.
+                </p>
+
+            </div>
+
+
+
+            <div class="infoCard">
+
+                <div class="icon">
+                    🎵
+                </div>
+
+                <h3>
+                    MUSIC
+                </h3>
+
+                <p>
+                    Music, updates and
+                    entertainment.
+                </p>
+
+            </div>
+
+
+
+            <div class="infoCard">
+
+                <div class="icon">
+                    🌐
+                </div>
+
+                <h3>
+                    SOCIAL
+                </h3>
+
+                <p>
+                    Connect with HAZARD 69
+                    online.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2026 HAZARD 69 OFFICIAL
+
+    </footer>
+
 
 </div>
 
 
 
 <script>
+
+/* =====================================================
+   ENTER WEBSITE
+===================================================== */
 
 function enterWebsite(){
 
@@ -586,7 +1066,7 @@ function enterWebsite(){
     entry.classList.add("exit");
 
 
-    /* SHOW WEBSITE */
+    /* SHOW MAIN WEBSITE */
 
     setTimeout(function(){
 
@@ -595,6 +1075,8 @@ function enterWebsite(){
         website.style.display = "block";
 
         document.body.style.overflow = "auto";
+
+        window.scrollTo(0,0);
 
     },1000);
 
