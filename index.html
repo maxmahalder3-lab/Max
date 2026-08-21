@@ -4,1210 +4,601 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HAZARD 69 OFFICIAL</title>
+<title>HAZARD 69 - Official</title>
 
 <style>
-
-/* =========================
-   RESET
-========================= */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
-body{
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
     font-family:Arial,Helvetica,sans-serif;
-    background:#020208;
-    color:#fff;
-    overflow-x:hidden;
 }
 
 /* =========================
-   BACKGROUND
+   ENTRY SCREEN
 ========================= */
 
-body::before{
-    content:"";
+#entryScreen{
     position:fixed;
     inset:0;
-    z-index:-5;
-
-    background:
-    radial-gradient(
-        circle at 15% 20%,
-        rgba(124,60,255,.25),
-        transparent 30%
-    ),
-    radial-gradient(
-        circle at 85% 25%,
-        rgba(0,229,255,.18),
-        transparent 30%
-    ),
-    radial-gradient(
-        circle at 50% 90%,
-        rgba(255,0,100,.15),
-        transparent 35%
-    );
+    z-index:9999;
+    overflow:hidden;
+    background:#000;
 }
 
-/* =========================
-   PARTICLES
-========================= */
+/* PHOTO */
 
-.particle{
-    position:fixed;
-    width:4px;
-    height:4px;
-    border-radius:50%;
-    background:#fff;
-    opacity:.5;
-    z-index:-2;
+.entryPhoto{
+    position:absolute;
+    inset:-5%;
+    width:110%;
+    height:110%;
+
+    object-fit:cover;
+    object-position:center;
+
+    filter:
+        brightness(.48)
+        contrast(1.2)
+        saturate(1.15);
 
     animation:
-    floating 7s ease-in-out infinite;
+        cinematicZoom 9s
+        ease-out
+        forwards;
 }
 
-.p1{left:8%;top:20%;}
-.p2{left:25%;top:70%;animation-delay:1s;}
-.p3{left:50%;top:25%;animation-delay:2s;}
-.p4{left:75%;top:75%;animation-delay:3s;}
-.p5{left:90%;top:30%;animation-delay:4s;}
-.p6{left:40%;top:80%;animation-delay:5s;}
+@keyframes cinematicZoom{
 
-@keyframes floating{
-
-    0%,100%{
-        transform:translateY(0) scale(1);
+    0%{
+        transform:scale(1.08);
     }
 
     50%{
-        transform:translateY(-45px) scale(1.5);
+        transform:scale(1.16);
+    }
+
+    100%{
+        transform:scale(1.03);
     }
 }
 
-/* =========================
-   NAVBAR
-========================= */
 
-nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
+/* DARK OVERLAY */
 
-    padding:18px 7%;
+.darkOverlay{
+    position:absolute;
+    inset:0;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 15%,
+            rgba(0,0,0,.35) 50%,
+            rgba(0,0,0,.88) 100%
+        );
+}
 
-    background:rgba(2,2,8,.72);
-    backdrop-filter:blur(18px);
 
-    border-bottom:
-    1px solid rgba(255,255,255,.08);
+/* PURPLE LIGHT */
 
-    z-index:9999;
+.lightEffect{
+    position:absolute;
+    width:500px;
+    height:500px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(125,70,255,.28),
+            transparent 65%
+        );
+
+    filter:blur(30px);
 
     animation:
-    navEntry 1s ease forwards;
+        lightPulse 3s
+        infinite
+        ease-in-out;
 }
 
-@keyframes navEntry{
+@keyframes lightPulse{
 
-    from{
-        opacity:0;
-        transform:translateY(-30px);
+    0%,100%{
+        opacity:.45;
+        transform:
+            translate(-50%,-50%)
+            scale(.8);
     }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
+    50%{
+        opacity:.8;
+        transform:
+            translate(-50%,-50%)
+            scale(1.15);
     }
 }
 
-.logo{
-    font-size:21px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.logo span{
-    color:#8b5cff;
-
-    text-shadow:
-    0 0 10px #7c3cff,
-    0 0 30px #7c3cff;
-}
-
-.links a{
-    color:#aaa;
-    text-decoration:none;
-    margin-left:25px;
-    font-size:14px;
-    transition:.3s;
-}
-
-.links a:hover{
-    color:#00e5ff;
-
-    text-shadow:
-    0 0 10px #00e5ff;
-}
 
 /* =========================
-   HERO
+   CONTENT
 ========================= */
 
-.hero{
-    min-height:100vh;
+.entryContent{
 
-    padding:
-    150px 7% 80px;
+    position:absolute;
+    inset:0;
 
     display:flex;
+    flex-direction:column;
+
     justify-content:center;
     align-items:center;
 
     text-align:center;
+
+    padding:25px;
+
+    z-index:5;
 }
 
-.hero-content{
-    width:100%;
-    max-width:950px;
+
+/* SMALL TEXT */
+
+.welcome{
+
+    font-size:13px;
+
+    letter-spacing:7px;
+
+    color:#d6d6d6;
+
+    margin-bottom:15px;
 
     opacity:0;
 
     animation:
-    heroEntry 1.4s
-    cubic-bezier(.17,.67,.25,1)
-    .3s forwards;
+        fadeUp 1s
+        .4s
+        forwards;
 }
 
-@keyframes heroEntry{
-
-    0%{
-        opacity:0;
-        transform:
-        translateY(80px)
-        scale(.75)
-        rotateX(15deg);
-        filter:blur(12px);
-    }
-
-    60%{
-        opacity:1;
-        transform:
-        translateY(-10px)
-        scale(1.03);
-        filter:blur(0);
-    }
-
-    100%{
-        opacity:1;
-        transform:
-        translateY(0)
-        scale(1)
-        rotateX(0);
-        filter:blur(0);
-    }
-}
-
-/* BADGE */
-
-.badge{
-    display:inline-block;
-
-    padding:9px 20px;
-
-    border-radius:50px;
-
-    background:
-    rgba(255,255,255,.06);
-
-    border:
-    1px solid rgba(255,255,255,.15);
-
-    color:#00e5ff;
-
-    font-size:12px;
-    letter-spacing:2px;
-
-    box-shadow:
-    0 0 30px
-    rgba(0,229,255,.12);
-
-    animation:
-    badgeGlow 3s ease-in-out infinite;
-}
-
-@keyframes badgeGlow{
-
-    0%,100%{
-        box-shadow:
-        0 0 20px
-        rgba(0,229,255,.10);
-    }
-
-    50%{
-        box-shadow:
-        0 0 35px
-        rgba(0,229,255,.30);
-    }
-}
 
 /* TITLE */
 
-.hero h1{
-
-    margin-top:25px;
+.title{
 
     font-size:
-    clamp(48px,9vw,100px);
-
-    line-height:.95;
+        clamp(
+            48px,
+            13vw,
+            125px
+        );
 
     font-weight:1000;
 
-    letter-spacing:-5px;
-
-    background:
-    linear-gradient(
-        90deg,
-        #fff,
-        #8b5cff,
-        #00e5ff,
-        #fff
-    );
-
-    background-size:300%;
-
-    -webkit-background-clip:text;
-
-    color:transparent;
-
-    animation:
-    titleGradient 6s linear infinite;
-}
-
-@keyframes titleGradient{
-
-    0%{
-        background-position:0%;
-    }
-
-    50%{
-        background-position:100%;
-    }
-
-    100%{
-        background-position:0%;
-    }
-}
-
-/* DESCRIPTION */
-
-.hero p{
-
-    max-width:650px;
-
-    margin:
-    25px auto;
-
-    color:#999;
-
-    line-height:1.8;
-
-    font-size:16px;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.buttons{
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-
-    margin-top:30px;
-}
-
-.btn{
-
-    display:inline-block;
-
-    padding:15px 28px;
-
-    border-radius:14px;
+    letter-spacing:
+        clamp(
+            5px,
+            2vw,
+            18px
+        );
 
     color:white;
 
-    text-decoration:none;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    border:
-    1px solid rgba(255,255,255,.15);
-
-    background:
-    linear-gradient(
-        135deg,
-        #7c3cff,
-        #4319bd
-    );
-
-    box-shadow:
-    0 10px 35px
-    rgba(124,60,255,.3);
-
-    transition:
-    transform .3s,
-    box-shadow .3s;
-}
-
-.btn:hover{
-
-    transform:
-    translateY(-6px)
-    scale(1.03);
-
-    box-shadow:
-    0 18px 50px
-    rgba(124,60,255,.6);
-}
-
-.btn.secondary{
-
-    background:
-    rgba(255,255,255,.06);
-}
-
-/* =========================
-   PROFILE CARD
-========================= */
-
-.profile{
-
-    max-width:700px;
-
-    margin:
-    45px auto 0;
-
-    padding:30px;
-
-    border-radius:30px;
-
-    background:
-    rgba(255,255,255,.055);
-
-    border:
-    1px solid rgba(255,255,255,.12);
-
-    backdrop-filter:blur(20px);
-
-    box-shadow:
-    0 25px 90px
-    rgba(0,0,0,.45);
-
-    animation:
-    profileEntry 1s
-    ease 1s backwards;
-}
-
-@keyframes profileEntry{
-
-    from{
-        opacity:0;
-        transform:
-        translateY(60px)
-        scale(.85);
-    }
-
-    to{
-        opacity:1;
-        transform:
-        translateY(0)
-        scale(1);
-    }
-}
-
-/* PROFILE LOGO */
-
-.profile-logo{
-
-    width:105px;
-    height:105px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:38px;
-    font-weight:1000;
-
-    background:
-    linear-gradient(
-        135deg,
-        #ff0066,
-        #7c3cff,
-        #00e5ff
-    );
-
-    box-shadow:
-    0 0 30px
-    rgba(124,60,255,.7),
-
-    0 0 80px
-    rgba(0,229,255,.15);
-
-    animation:
-    logoFloat 4s ease-in-out infinite;
-}
-
-@keyframes logoFloat{
-
-    0%,100%{
-        transform:translateY(0) rotate(0);
-    }
-
-    50%{
-        transform:
-        translateY(-8px)
-        rotate(3deg);
-    }
-}
-
-.username{
-
-    margin-top:18px;
-
-    font-size:25px;
-
-    font-weight:bold;
-}
-
-.instagram{
-
-    margin-top:7px;
-
-    color:#888;
-
-    font-size:14px;
-}
-
-/* =========================
-   PHOTO UPLOAD
-========================= */
-
-.photo-area{
-
-    margin-top:25px;
-}
-
-.photo-preview{
-
-    width:100%;
-
-    max-height:400px;
-
-    object-fit:cover;
-
-    display:none;
-
-    margin-bottom:18px;
-
-    border-radius:22px;
-
-    border:
-    1px solid rgba(255,255,255,.15);
-
-    box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.5);
-
-    animation:
-    photoEntry .7s ease;
-}
-
-@keyframes photoEntry{
-
-    from{
-        opacity:0;
-        transform:
-        scale(.8)
-        rotateX(15deg);
-    }
-
-    to{
-        opacity:1;
-        transform:
-        scale(1)
-        rotateX(0);
-    }
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-section{
-    padding:100px 7%;
-}
-
-.section-title{
-
-    text-align:center;
-
-    margin-bottom:50px;
-}
-
-.section-title h2{
-
-    font-size:
-    clamp(32px,5vw,48px);
-
-    margin-bottom:10px;
-}
-
-.section-title p{
-
-    color:#777;
-}
-
-/* =========================
-   SCROLL ENTRY
-========================= */
-
-.reveal{
+    text-shadow:
+        0 0 15px
+        rgba(145,80,255,.9),
+
+        0 0 45px
+        rgba(145,80,255,.6),
+
+        0 0 90px
+        rgba(145,80,255,.35);
 
     opacity:0;
 
-    transform:
-    translateY(70px)
-    scale(.94);
-
-    filter:blur(8px);
-
-    transition:
-    opacity .9s ease,
-    transform .9s ease,
-    filter .9s ease;
+    animation:
+        titleReveal 1.5s
+        .8s
+        forwards;
 }
 
-.reveal.show{
 
-    opacity:1;
-
-    transform:
-    translateY(0)
-    scale(1);
-
-    filter:blur(0);
+.title span{
+    color:#8b5cf6;
 }
 
-/* =========================
-   CARDS
-========================= */
 
-.cards{
+/* SUBTITLE */
 
-    max-width:1100px;
+.subtitle{
 
-    margin:auto;
+    margin-top:8px;
 
-    display:grid;
+    font-size:
+        clamp(
+            12px,
+            2vw,
+            18px
+        );
 
-    grid-template-columns:
-    repeat(3,1fr);
+    letter-spacing:6px;
 
-    gap:22px;
+    color:#c5c5c5;
+
+    opacity:0;
+
+    animation:
+        fadeUp 1s
+        1.4s
+        forwards;
 }
 
-.card{
 
-    padding:32px;
+/* ENTER BUTTON */
 
-    min-height:210px;
+.enterButton{
 
-    border-radius:25px;
+    margin-top:42px;
 
-    background:
-    linear-gradient(
-        145deg,
-        rgba(255,255,255,.08),
-        rgba(255,255,255,.025)
-    );
+    min-width:210px;
+
+    padding:16px 30px;
+
+    border-radius:50px;
 
     border:
-    1px solid rgba(255,255,255,.1);
+        1px solid
+        rgba(255,255,255,.4);
 
-    backdrop-filter:blur(15px);
+    background:
+        rgba(255,255,255,.08);
 
-    transition:.4s;
-}
+    color:white;
 
-.card:hover{
+    font-size:15px;
 
-    transform:
-    translateY(-12px)
-    scale(1.02);
+    font-weight:bold;
 
-    border-color:
-    rgba(0,229,255,.45);
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+    backdrop-filter:
+        blur(15px);
 
     box-shadow:
-    0 25px 70px
-    rgba(0,0,0,.4);
+        0 0 30px
+        rgba(123,78,255,.35);
+
+    opacity:0;
+
+    animation:
+        fadeUp 1s
+        1.9s
+        forwards;
+
+    transition:
+        .3s;
 }
 
-.icon{
 
-    font-size:40px;
+.enterButton:hover{
 
-    margin-bottom:20px;
-}
-
-.card h3{
-
-    margin-bottom:12px;
-
-    font-size:20px;
-}
-
-.card p{
-
-    color:#888;
-
-    line-height:1.7;
-}
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact-box{
-
-    max-width:750px;
-
-    margin:auto;
-
-    padding:45px;
-
-    text-align:center;
-
-    border-radius:30px;
+    transform:
+        scale(1.06);
 
     background:
-    rgba(255,255,255,.05);
+        linear-gradient(
+            135deg,
+            #6847ff,
+            #a855f7
+        );
 
-    border:
-    1px solid rgba(255,255,255,.1);
-
-    backdrop-filter:blur(18px);
+    box-shadow:
+        0 0 50px
+        rgba(139,92,246,.7);
 }
 
+
 /* =========================
-   FOOTER
+   BOTTOM
 ========================= */
 
-footer{
+.footerText{
 
-    padding:35px;
+    position:absolute;
+
+    bottom:25px;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    color:
+        rgba(255,255,255,.5);
+
+    opacity:0;
+
+    animation:
+        fadeUp 1s
+        2.3s
+        forwards;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes titleReveal{
+
+    0%{
+        opacity:0;
+        transform:
+            scale(.7)
+            translateY(25px);
+
+        filter:
+            blur(15px);
+    }
+
+    100%{
+        opacity:1;
+        transform:
+            scale(1)
+            translateY(0);
+
+        filter:
+            blur(0);
+    }
+}
+
+
+/* =========================
+   EXIT ANIMATION
+========================= */
+
+#entryScreen.exit{
+
+    animation:
+        exitScreen
+        1s
+        forwards;
+}
+
+
+@keyframes exitScreen{
+
+    0%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(1.15);
+        pointer-events:none;
+    }
+}
+
+
+/* =========================
+   MAIN WEBSITE
+========================= */
+
+#mainWebsite{
+
+    display:none;
+
+    width:100%;
+    height:100vh;
+
+    overflow:auto;
+
+    background:
+        linear-gradient(
+            135deg,
+            #080b12,
+            #15102b
+        );
+
+    color:white;
+
+    padding:40px;
 
     text-align:center;
-
-    color:#555;
-
-    border-top:
-    1px solid rgba(255,255,255,.08);
 }
 
-/* =========================
-   MOBILE
-========================= */
 
-@media(max-width:800px){
+#mainWebsite h1{
 
-    nav{
-        padding:16px 5%;
-    }
+    font-size:45px;
 
-    .links{
-        display:none;
-    }
-
-    .hero{
-        padding:
-        130px 5% 70px;
-    }
-
-    .hero h1{
-        letter-spacing:-3px;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    section{
-        padding:75px 5%;
-    }
-
-    .profile{
-        padding:25px 18px;
-    }
-
-    .contact-box{
-        padding:30px 20px;
-    }
+    margin-top:80px;
 
 }
 
+
+#mainWebsite p{
+
+    color:#aab2c5;
+
+    margin-top:15px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .entryPhoto{
+        object-position:center top;
+    }
+
+    .welcome{
+        letter-spacing:4px;
+    }
+
+    .subtitle{
+        letter-spacing:3px;
+    }
+
+    .enterButton{
+        margin-top:35px;
+    }
+
+}
 </style>
 </head>
 
 <body>
 
-<!-- PARTICLES -->
 
-<div class="particle p1"></div>
-<div class="particle p2"></div>
-<div class="particle p3"></div>
-<div class="particle p4"></div>
-<div class="particle p5"></div>
-<div class="particle p6"></div>
+<!-- ==================================
+     ENTRY ANIMATION
+================================== -->
+
+<div id="entryScreen">
+
+    <!-- YOUR PHOTO -->
+
+    <img
+        src="entry-photo.jpg"
+        class="entryPhoto"
+        alt="HAZARD 69 Entry"
+    >
 
 
-<!-- NAVBAR -->
+    <!-- DARK CINEMATIC OVERLAY -->
 
-<nav>
+    <div class="darkOverlay"></div>
 
-    <div class="logo">
-        HAZARD <span>69</span>
+
+    <!-- LIGHT EFFECT -->
+
+    <div class="lightEffect"></div>
+
+
+    <!-- CONTENT -->
+
+    <div class="entryContent">
+
+        <div class="welcome">
+            WELCOME TO
+        </div>
+
+
+        <div class="title">
+            HAZARD <span>69</span>
+        </div>
+
+
+        <div class="subtitle">
+            OFFICIAL WEBSITE
+        </div>
+
+
+        <button
+            class="enterButton"
+            onclick="enterWebsite()"
+        >
+            ENTER WEBSITE
+        </button>
+
     </div>
 
-    <div class="links">
 
-        <a href="#home">Home</a>
-
-        <a href="#about">About</a>
-
-        <a href="#features">Features</a>
-
-        <a href="#contact">Contact</a>
-
+    <div class="footerText">
+        © HAZARD 69 OFFICIAL
     </div>
 
-</nav>
+</div>
 
 
-<!-- HERO -->
 
-<section class="hero" id="home">
+<!-- ==================================
+     MAIN WEBSITE
+================================== -->
 
-<div class="hero-content">
-
-    <div class="badge">
-        ★ OFFICIAL WEBSITE ★
-    </div>
+<div id="mainWebsite">
 
     <h1>
         HAZARD 69
     </h1>
 
     <p>
-        Welcome to the official digital space of
-        <b>HAZARD 69 OFFICIAL</b>.
-        Experience a modern, stylish and powerful
-        digital identity.
-    </p>
-
-
-    <div class="buttons">
-
-        <a
-            href="#about"
-            class="btn"
-        >
-            Explore Now
-        </a>
-
-        <a
-            href="#contact"
-            class="btn secondary"
-        >
-            Connect
-        </a>
-
-    </div>
-
-
-    <!-- PROFILE -->
-
-    <div class="profile">
-
-        <div class="profile-logo">
-            H69
-        </div>
-
-        <div class="username">
-            HAZARD 69 OFFICIAL
-        </div>
-
-        <div class="instagram">
-            📷 @hazard69official
-        </div>
-
-
-        <!-- PHOTO -->
-
-        <div class="photo-area">
-
-            <img
-                id="preview"
-                class="photo-preview"
-                alt="Uploaded photo"
-            >
-
-            <label
-                for="photoInput"
-                class="btn"
-            >
-                📸 Add Photo
-            </label>
-
-            <input
-                id="photoInput"
-                type="file"
-                accept="image/*"
-                style="display:none;"
-            >
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section id="about">
-
-<div class="section-title reveal">
-
-    <h2>
-        About Us
-    </h2>
-
-    <p>
-        Built with style. Designed for the future.
+        Welcome to the Official Website
     </p>
 
 </div>
 
-
-<div class="cards">
-
-    <div class="card reveal">
-
-        <div class="icon">
-            ⚡
-        </div>
-
-        <h3>
-            Fast Experience
-        </h3>
-
-        <p>
-            A lightweight and smooth website
-            experience designed for mobile
-            and desktop users.
-        </p>
-
-    </div>
-
-
-    <div class="card reveal">
-
-        <div class="icon">
-            💎
-        </div>
-
-        <h3>
-            Premium Design
-        </h3>
-
-        <p>
-            Glassmorphism, glowing gradients,
-            animations and modern visual effects.
-        </p>
-
-    </div>
-
-
-    <div class="card reveal">
-
-        <div class="icon">
-            🚀
-        </div>
-
-        <h3>
-            Next Level
-        </h3>
-
-        <p>
-            A unique digital identity created
-            specially for HAZARD 69 OFFICIAL.
-        </p>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- FEATURES -->
-
-<section id="features">
-
-<div class="section-title reveal">
-
-    <h2>
-        Features
-    </h2>
-
-    <p>
-        Everything in one place.
-    </p>
-
-</div>
-
-
-<div class="cards">
-
-    <div class="card reveal">
-
-        <div class="icon">
-            📱
-        </div>
-
-        <h3>
-            Mobile Friendly
-        </h3>
-
-        <p>
-            Fully responsive layout for
-            smartphones, tablets and computers.
-        </p>
-
-    </div>
-
-
-    <div class="card reveal">
-
-        <div class="icon">
-            🎨
-        </div>
-
-        <h3>
-            Custom Style
-        </h3>
-
-        <p>
-            Easily customize your colors,
-            text, photos and social links.
-        </p>
-
-    </div>
-
-
-    <div class="card reveal">
-
-        <div class="icon">
-            ✨
-        </div>
-
-        <h3>
-            Entry Animation
-        </h3>
-
-        <p>
-            Smooth fade, slide, scale and
-            scroll reveal animations.
-        </p>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section id="contact">
-
-<div class="section-title reveal">
-
-    <h2>
-        Connect With Us
-    </h2>
-
-    <p>
-        Follow HAZARD 69 OFFICIAL.
-    </p>
-
-</div>
-
-
-<div class="contact-box reveal">
-
-    <h2>
-        📷 HAZARD 69 OFFICIAL
-    </h2>
-
-    <p
-        style="
-        color:#888;
-        margin:15px 0 25px;
-        "
-    >
-        Stay connected and follow
-        our latest updates.
-    </p>
-
-
-    <a
-        href="https://www.instagram.com/"
-        target="_blank"
-        class="btn"
-    >
-        Instagram ↗
-    </a>
-
-</div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-    © 2026 HAZARD 69 OFFICIAL
-    — All Rights Reserved.
-
-</footer>
 
 
 <script>
 
-/* =========================
-   PHOTO ADD
-========================= */
+function enterWebsite(){
 
-const photoInput =
-document.getElementById("photoInput");
-
-const preview =
-document.getElementById("preview");
-
-
-photoInput.addEventListener(
-    "change",
-    function(){
-
-        const file =
-        this.files[0];
-
-        if(!file) return;
-
-        const reader =
-        new FileReader();
-
-        reader.onload =
-        function(e){
-
-            preview.src =
-            e.target.result;
-
-            preview.style.display =
-            "block";
-
-        };
-
-        reader.readAsDataURL(file);
-
-    }
-);
-
-
-/* =========================
-   SCROLL ENTRY ANIMATION
-========================= */
-
-const revealElements =
-document.querySelectorAll(".reveal");
-
-
-const observer =
-new IntersectionObserver(
-
-    (entries) => {
-
-        entries.forEach(
-            (entry) => {
-
-                if(entry.isIntersecting){
-
-                    entry.target.classList.add(
-                        "show"
-                    );
-
-                }
-
-            }
+    const entry =
+        document.getElementById(
+            "entryScreen"
         );
 
-    },
-
-    {
-        threshold:.15
-    }
-
-);
+    const website =
+        document.getElementById(
+            "mainWebsite"
+        );
 
 
-revealElements.forEach(
-    (element) => {
+    /* EXIT ANIMATION */
 
-        observer.observe(element);
+    entry.classList.add("exit");
 
-    }
-);
+
+    /* SHOW WEBSITE */
+
+    setTimeout(function(){
+
+        entry.style.display = "none";
+
+        website.style.display = "block";
+
+        document.body.style.overflow = "auto";
+
+    },1000);
+
+}
 
 </script>
 
