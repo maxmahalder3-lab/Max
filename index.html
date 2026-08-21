@@ -4,1081 +4,469 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>HAZARD 69 Official</title>
+<title>HAZARD 69 — OFFICIAL</title>
 
 <style>
-
-/* =====================================================
-   GLOBAL
-===================================================== */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-}
-
-html,body{
-    width:100%;
-    min-height:100%;
-    background:#05070d;
-    color:white;
     font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    overflow:hidden;
+    background:#050505;
+    color:white;
+    overflow-x:hidden;
 }
 
-
-/* =====================================================
-   ENTRY ANIMATION
-===================================================== */
-
-#entryScreen{
+/* Animated Background */
+.background{
     position:fixed;
     inset:0;
-    z-index:99999;
-    overflow:hidden;
-    background:#000;
+    z-index:-3;
+
+    background:
+        linear-gradient(120deg,rgba(0,0,0,.85),rgba(10,10,10,.45)),
+        url("bg.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    animation:zoom 18s infinite alternate ease-in-out;
 }
 
+@keyframes zoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.08);}
+}
 
-/* ENTRY PHOTO */
+/* Glow */
+.glow{
+    position:fixed;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:rgba(255,0,0,.18);
+    filter:blur(100px);
+    top:10%;
+    left:10%;
+    z-index:-2;
+}
 
-.entryPhoto{
-    position:absolute;
-    inset:-5%;
+/* Navbar */
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:18px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-    width:110%;
-    height:110%;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(15px);
 
-    object-fit:cover;
-    object-position:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    z-index:20;
+}
+
+.brand{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:3px;
+    text-shadow:0 0 15px red;
+}
+
+.nav-btn{
+    padding:10px 18px;
+    border:1px solid rgba(255,0,0,.5);
+    border-radius:30px;
+    color:white;
+    text-decoration:none;
+    font-size:13px;
+    transition:.3s;
+}
+
+.nav-btn:hover{
+    background:red;
+    box-shadow:0 0 25px red;
+}
+
+/* Hero */
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:100px 20px 40px;
+}
+
+.content{
+    max-width:850px;
+}
+
+/* Logo */
+.logo{
+    width:180px;
+    max-width:55vw;
 
     filter:
-        brightness(.48)
-        contrast(1.2)
-        saturate(1.15);
+        drop-shadow(0 0 15px rgba(255,0,0,.8))
+        drop-shadow(0 0 45px rgba(255,0,0,.4));
 
     animation:
-        cinematicZoom 9s
-        ease-out
-        forwards;
+        float 4s ease-in-out infinite,
+        logoGlow 2s infinite alternate;
 }
 
-@keyframes cinematicZoom{
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
 
-    0%{
-        transform:scale(1.08);
+@keyframes logoGlow{
+    from{
+        filter:drop-shadow(0 0 10px red);
     }
-
-    50%{
-        transform:scale(1.16);
-    }
-
-    100%{
-        transform:scale(1.03);
+    to{
+        filter:drop-shadow(0 0 35px red);
     }
 }
 
-
-/* DARK OVERLAY */
-
-.darkOverlay{
-    position:absolute;
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            transparent 10%,
-            rgba(0,0,0,.35) 50%,
-            rgba(0,0,0,.9) 100%
-        );
+.subtitle{
+    margin-top:25px;
+    font-size:14px;
+    letter-spacing:7px;
+    color:#aaa;
 }
 
+.title{
+    margin-top:12px;
+    font-size:clamp(45px,10vw,95px);
+    font-weight:1000;
+    letter-spacing:8px;
 
-/* LIGHT EFFECT */
+    background:linear-gradient(
+        180deg,
+        #fff,
+        #ff3030,
+        #650000
+    );
 
-.lightEffect{
-    position:absolute;
+    -webkit-background-clip:text;
+    color:transparent;
 
-    width:500px;
-    height:500px;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(125,70,255,.30),
-            transparent 68%
-        );
-
-    filter:blur(30px);
-
-    animation:
-        lightPulse 3s
-        infinite
-        ease-in-out;
+    text-shadow:0 0 30px rgba(255,0,0,.3);
 }
 
-@keyframes lightPulse{
+/* Enter Button */
+.enter{
+    display:inline-flex;
+    margin-top:35px;
+    padding:17px 45px;
 
-    0%,100%{
-        opacity:.45;
-        transform:
-            translate(-50%,-50%)
-            scale(.8);
-    }
+    color:white;
+    text-decoration:none;
 
-    50%{
-        opacity:.85;
-        transform:
-            translate(-50%,-50%)
-            scale(1.15);
-    }
+    font-weight:bold;
+    letter-spacing:3px;
+
+    border:1px solid rgba(255,0,0,.7);
+    border-radius:50px;
+
+    background:rgba(255,0,0,.08);
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+        0 0 15px rgba(255,0,0,.25),
+        inset 0 0 20px rgba(255,0,0,.05);
+
+    transition:.35s;
 }
 
+.enter:hover{
+    transform:translateY(-4px) scale(1.04);
+    background:#e60000;
+    box-shadow:
+        0 0 20px red,
+        0 0 60px rgba(255,0,0,.5);
+}
 
-/* ENTRY CONTENT */
+/* Cards */
+.cards{
+    margin-top:55px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
 
-.entryContent{
-    position:absolute;
-    inset:0;
+.card{
+    width:170px;
+    padding:22px 15px;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+
+    backdrop-filter:blur(15px);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(255,0,0,.6);
+    box-shadow:0 10px 35px rgba(255,0,0,.2);
+}
+
+.card-icon{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.card h3{
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.card p{
+    margin-top:6px;
+    font-size:11px;
+    color:#999;
+}
+
+/* Social */
+.social{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+}
+
+.social a{
+    width:45px;
+    height:45px;
 
     display:flex;
-    flex-direction:column;
-
     justify-content:center;
     align-items:center;
 
-    text-align:center;
-
-    padding:25px;
-
-    z-index:5;
-}
-
-
-.welcome{
-    font-size:13px;
-
-    letter-spacing:7px;
-
-    color:#ddd;
-
-    margin-bottom:15px;
-
-    opacity:0;
-
-    animation:
-        fadeUp 1s
-        .4s
-        forwards;
-}
-
-
-.title{
-    font-size:
-        clamp(48px,13vw,125px);
-
-    font-weight:1000;
-
-    letter-spacing:
-        clamp(5px,2vw,18px);
+    border-radius:50%;
 
     color:white;
+    text-decoration:none;
 
-    text-shadow:
-        0 0 15px
-        rgba(145,80,255,.9),
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.12);
 
-        0 0 45px
-        rgba(145,80,255,.6),
-
-        0 0 90px
-        rgba(145,80,255,.35);
-
-    opacity:0;
-
-    animation:
-        titleReveal 1.5s
-        .8s
-        forwards;
+    transition:.3s;
 }
 
-
-.title span{
-    color:#8b5cf6;
+.social a:hover{
+    background:red;
+    transform:translateY(-5px);
+    box-shadow:0 0 25px red;
 }
 
+/* Music Button */
+.music{
+    position:fixed;
+    right:20px;
+    bottom:20px;
 
-.subtitle{
-    margin-top:8px;
+    width:55px;
+    height:55px;
 
-    font-size:
-        clamp(12px,2vw,18px);
+    border-radius:50%;
+    border:1px solid rgba(255,0,0,.6);
 
-    letter-spacing:6px;
-
-    color:#c5c5c5;
-
-    opacity:0;
-
-    animation:
-        fadeUp 1s
-        1.4s
-        forwards;
-}
-
-
-/* ENTER BUTTON */
-
-.enterButton{
-    margin-top:42px;
-
-    min-width:220px;
-
-    padding:16px 30px;
-
-    border-radius:50px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.4);
-
-    background:
-        rgba(255,255,255,.08);
-
+    background:rgba(0,0,0,.6);
     color:white;
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    letter-spacing:3px;
 
     cursor:pointer;
 
     backdrop-filter:blur(15px);
 
-    box-shadow:
-        0 0 30px
-        rgba(123,78,255,.35);
+    box-shadow:0 0 20px rgba(255,0,0,.25);
 
-    opacity:0;
-
-    animation:
-        fadeUp 1s
-        1.9s
-        forwards;
-
-    transition:.3s;
+    z-index:50;
 }
 
-
-.enterButton:hover{
-    transform:scale(1.06);
-
-    background:
-        linear-gradient(
-            135deg,
-            #6847ff,
-            #a855f7
-        );
-
-    box-shadow:
-        0 0 50px
-        rgba(139,92,246,.7);
+.music:hover{
+    background:red;
+    box-shadow:0 0 30px red;
 }
 
-
-/* ENTRY FOOTER */
-
-.footerText{
+/* Footer */
+footer{
     position:absolute;
+    bottom:15px;
+    width:100%;
+    text-align:center;
 
-    bottom:25px;
-
+    color:#777;
     font-size:10px;
-
-    letter-spacing:3px;
-
-    color:
-        rgba(255,255,255,.5);
-
-    opacity:0;
-
-    animation:
-        fadeUp 1s
-        2.3s
-        forwards;
-}
-
-
-/* ENTRY ANIMATIONS */
-
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:translateY(25px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-
-@keyframes titleReveal{
-
-    0%{
-        opacity:0;
-
-        transform:
-            scale(.7)
-            translateY(25px);
-
-        filter:blur(15px);
-    }
-
-    100%{
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-
-        filter:blur(0);
-    }
-}
-
-
-/* ENTRY EXIT */
-
-#entryScreen.exit{
-    animation:
-        exitScreen
-        1s
-        forwards;
-}
-
-
-@keyframes exitScreen{
-
-    0%{
-        opacity:1;
-        transform:scale(1);
-    }
-
-    100%{
-        opacity:0;
-        transform:scale(1.15);
-        pointer-events:none;
-    }
-}
-
-
-/* =====================================================
-   MAIN WEBSITE
-===================================================== */
-
-#mainWebsite{
-    display:none;
-
-    min-height:100vh;
-
-    overflow:auto;
-
-    background:
-        radial-gradient(
-            circle at top,
-            #21154a,
-            #080b12 55%,
-            #05070d
-        );
-
-    color:white;
-
-    padding-bottom:80px;
-}
-
-
-/* HEADER */
-
-.header{
-    position:sticky;
-
-    top:0;
-
-    z-index:100;
-
-    height:70px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 25px;
-
-    background:
-        rgba(5,7,13,.82);
-
-    border-bottom:
-        1px solid
-        #202638;
-
-    backdrop-filter:blur(18px);
-}
-
-
-.logo{
-    font-size:21px;
-
-    font-weight:900;
-
     letter-spacing:2px;
 }
 
-
-.logo span{
-    color:#8b5cf6;
-}
-
-
-.menuButton{
-    padding:10px 16px;
-
-    border:0;
-
-    border-radius:12px;
-
-    background:#181e2d;
-
-    color:white;
-
-    cursor:pointer;
-}
-
-
-/* MAIN CONTENT */
-
-.content{
-    max-width:1100px;
-
-    margin:auto;
-
-    padding:
-        50px 20px;
-}
-
-
-.heroTitle{
-    text-align:center;
-
-    font-size:
-        clamp(35px,7vw,70px);
-
-    font-weight:900;
-
-    text-shadow:
-        0 0 35px
-        rgba(139,92,246,.5);
-}
-
-
-.heroSubtitle{
-    text-align:center;
-
-    color:#9fa9bd;
-
-    margin-top:12px;
-
-    letter-spacing:3px;
-}
-
-
-/* =====================================================
-   PROFESSIONAL PHOTO CARD
-===================================================== */
-
-.photo-section{
-    width:100%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:60px 20px;
-}
-
-
-.photo-card{
-    position:relative;
-
-    width:
-        min(90vw,600px);
-
-    border-radius:30px;
-
-    overflow:hidden;
-
-    background:#101522;
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.6);
-
-    transform:translateY(0);
-
-    transition:
-        transform .4s ease,
-        box-shadow .4s ease;
-}
-
-
-.photo-card:hover{
-    transform:
-        translateY(-10px)
-        scale(1.02);
-
-    box-shadow:
-        0 40px 100px
-        rgba(125,70,255,.35);
-}
-
-
-/* PHOTO */
-
-.website-photo{
-    display:block;
-
-    width:100%;
-
-    height:auto;
-
-    min-height:400px;
-
-    object-fit:cover;
-
-    object-position:center;
-
-    filter:
-        brightness(.8)
-        contrast(1.1)
-        saturate(1.1);
-
-    transition:
-        transform .8s ease,
-        filter .5s ease;
-}
-
-
-.photo-card:hover .website-photo{
-    transform:scale(1.06);
-
-    filter:
-        brightness(.95)
-        contrast(1.15)
-        saturate(1.2);
-}
-
-
-/* PHOTO PURPLE GLOW */
-
-.photo-glow{
-    position:absolute;
-
-    width:250px;
-    height:250px;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(139,92,246,.35),
-            transparent 70%
-        );
-
-    filter:blur(35px);
-
-    pointer-events:none;
-
-    z-index:2;
-}
-
-
-/* PHOTO TEXT */
-
-.photo-overlay{
-    position:absolute;
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    z-index:3;
-
-    padding:
-        70px 25px 25px;
-
-    text-align:center;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(0,0,0,.92)
-        );
-}
-
-
-.photo-overlay h2{
-    margin:0;
-
-    color:white;
-
-    font-size:
-        clamp(28px,6vw,45px);
-
-    font-weight:900;
-
-    letter-spacing:5px;
-
-    text-shadow:
-        0 0 20px
-        rgba(139,92,246,.8);
-}
-
-
-.photo-overlay p{
-    margin-top:7px;
-
-    color:#c5b5ff;
-
-    font-size:12px;
-
-    letter-spacing:6px;
-}
-
-
-/* =====================================================
-   INFO CARDS
-===================================================== */
-
-.infoGrid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px,1fr)
-        );
-
-    gap:20px;
-
-    margin-top:30px;
-}
-
-
-.infoCard{
-    padding:25px;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #151b2a,
-            #0b101a
-        );
-
-    border:
-        1px solid
-        #252e43;
-
-    text-align:center;
-}
-
-
-.infoCard .icon{
-    font-size:40px;
-
-    margin-bottom:12px;
-}
-
-
-.infoCard h3{
-    margin-bottom:8px;
-}
-
-
-.infoCard p{
-    color:#9ca7bb;
-
-    line-height:1.5;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.footer{
-    text-align:center;
-
-    padding:30px 20px;
-
-    color:#6f798c;
-
-    font-size:12px;
-
-    letter-spacing:2px;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
+/* Mobile */
 @media(max-width:600px){
 
-    .entryPhoto{
-        object-position:center top;
+    nav{
+        padding:15px 5%;
     }
 
-    .welcome{
-        letter-spacing:4px;
+    .brand{
+        font-size:17px;
+    }
+
+    .nav-btn{
+        padding:8px 13px;
+        font-size:11px;
+    }
+
+    .logo{
+        width:145px;
     }
 
     .subtitle{
-        letter-spacing:3px;
+        font-size:10px;
+        letter-spacing:4px;
     }
 
-    .enterButton{
-        margin-top:35px;
+    .title{
+        letter-spacing:4px;
     }
 
-    .header{
-        padding:0 15px;
+    .card{
+        width:145px;
+        padding:18px 10px;
     }
 
-    .content{
-        padding:
-            35px 15px;
+    .enter{
+        padding:15px 35px;
     }
-
-    .photo-section{
-        padding:
-            40px 0;
-    }
-
-    .photo-card{
-        width:100%;
-
-        border-radius:22px;
-    }
-
-    .website-photo{
-        min-height:350px;
-    }
-
-    .photo-overlay h2{
-        letter-spacing:3px;
-    }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
+<div class="background"></div>
+<div class="glow"></div>
 
-<!-- =====================================================
-     ENTRY ANIMATION
-===================================================== -->
+<nav>
+    <div class="brand">HAZARD 69</div>
 
-<div id="entryScreen">
+    <a href="#official" class="nav-btn">
+        OFFICIAL
+    </a>
+</nav>
 
+<section class="hero" id="official">
 
-    <!-- তোমার পাঠানো ছবি -->
+    <div class="content">
 
-    <img
-        src="photo.jpg"
-        class="entryPhoto"
-        alt="HAZARD 69 Entry"
-    >
-
-
-    <div class="darkOverlay"></div>
-
-    <div class="lightEffect"></div>
-
-
-    <div class="entryContent">
-
-        <div class="welcome">
-            WELCOME TO
-        </div>
-
-
-        <div class="title">
-            HAZARD <span>69</span>
-        </div>
-
+        <!-- YOUR LOGO -->
+        <img src="logo.png" class="logo" alt="HAZARD 69 Logo">
 
         <div class="subtitle">
-            OFFICIAL WEBSITE
+            WELCOME TO THE
         </div>
 
-
-        <button
-            class="enterButton"
-            onclick="enterWebsite()"
-        >
-            ENTER WEBSITE
-        </button>
-
-    </div>
-
-
-    <div class="footerText">
-        © HAZARD 69 OFFICIAL
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     MAIN WEBSITE
-===================================================== -->
-
-<div id="mainWebsite">
-
-
-    <!-- HEADER -->
-
-    <header class="header">
-
-        <div class="logo">
-            HAZARD <span>69</span>
-        </div>
-
-        <button
-            class="menuButton"
-            onclick="window.scrollTo({
-                top:0,
-                behavior:'smooth'
-            })"
-        >
-            HOME
-        </button>
-
-    </header>
-
-
-
-    <!-- CONTENT -->
-
-    <main class="content">
-
-
-        <h1 class="heroTitle">
+        <div class="title">
             HAZARD 69
-        </h1>
+        </div>
 
-
-        <p class="heroSubtitle">
-            OFFICIAL WEBSITE
+        <p style="color:#aaa;font-size:13px;margin-top:10px;">
+            OFFICIAL DIGITAL EXPERIENCE
         </p>
 
+        <a href="#" class="enter">
+            ENTER WEBSITE
+        </a>
 
+        <div class="cards">
 
-        <!-- =================================================
-             PHOTO
-        ================================================== -->
-
-        <section class="photo-section">
-
-            <div class="photo-card">
-
-
-                <!-- PURPLE GLOW -->
-
-                <div class="photo-glow"></div>
-
-
-                <!-- PHOTO -->
-
-                <img
-                    src="photo.jpg"
-                    alt="HAZARD 69"
-                    class="website-photo"
-                >
-
-
-                <!-- PHOTO TEXT -->
-
-                <div class="photo-overlay">
-
-                    <h2>
-                        HAZARD 69
-                    </h2>
-
-                    <p>
-                        OFFICIAL
-                    </p>
-
-                </div>
-
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>OFFICIAL</h3>
+                <p>Official HAZARD 69 website</p>
             </div>
 
-        </section>
-
-
-
-        <!-- =================================================
-             INFO
-        ================================================== -->
-
-        <div class="infoGrid">
-
-
-            <div class="infoCard">
-
-                <div class="icon">
-                    ⚡
-                </div>
-
-                <h3>
-                    HAZARD 69
-                </h3>
-
-                <p>
-                    Official website and
-                    digital platform.
-                </p>
-
+            <div class="card">
+                <div class="card-icon">🔥</div>
+                <h3>PREMIUM</h3>
+                <p>Exclusive digital experience</p>
             </div>
 
-
-
-            <div class="infoCard">
-
-                <div class="icon">
-                    🎵
-                </div>
-
-                <h3>
-                    MUSIC
-                </h3>
-
-                <p>
-                    Music, updates and
-                    entertainment.
-                </p>
-
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3>CONNECT</h3>
+                <p>Follow us online</p>
             </div>
-
-
-
-            <div class="infoCard">
-
-                <div class="icon">
-                    🌐
-                </div>
-
-                <h3>
-                    SOCIAL
-                </h3>
-
-                <p>
-                    Connect with HAZARD 69
-                    online.
-                </p>
-
-            </div>
-
 
         </div>
 
-    </main>
+        <!-- SOCIAL LINKS -->
+        <div class="social">
 
+            <a href="https://www.instagram.com/hazard_69_official/"
+               target="_blank">IG</a>
 
+            <a href="#" target="_blank">YT</a>
 
-    <!-- FOOTER -->
+            <a href="#" target="_blank">TG</a>
 
-    <footer class="footer">
+        </div>
 
-        © 2026 HAZARD 69 OFFICIAL
+    </div>
 
-    </footer>
+</section>
 
+<footer>
+    © 2026 HAZARD 69 • OFFICIAL WEBSITE
+</footer>
 
-</div>
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-
+<button class="music" onclick="toggleMusic()" id="musicBtn">
+    🔇
+</button>
 
 <script>
 
-/* =====================================================
-   ENTER WEBSITE
-===================================================== */
+const music = document.getElementById("music");
+const btn = document.getElementById("musicBtn");
 
-function enterWebsite(){
+/* Try autoplay */
+window.addEventListener("load",()=>{
+    music.volume = 0.35;
 
-    const entry =
-        document.getElementById(
-            "entryScreen"
-        );
+    music.play().then(()=>{
+        btn.innerHTML="🔊";
+    }).catch(()=>{
+        btn.innerHTML="🔇";
+    });
+});
 
-    const website =
-        document.getElementById(
-            "mainWebsite"
-        );
+/* Music toggle */
+function toggleMusic(){
 
-
-    /* EXIT ANIMATION */
-
-    entry.classList.add("exit");
-
-
-    /* SHOW MAIN WEBSITE */
-
-    setTimeout(function(){
-
-        entry.style.display = "none";
-
-        website.style.display = "block";
-
-        document.body.style.overflow = "auto";
-
-        window.scrollTo(0,0);
-
-    },1000);
+    if(music.paused){
+        music.play();
+        btn.innerHTML="🔊";
+    }else{
+        music.pause();
+        btn.innerHTML="🔇";
+    }
 
 }
 
